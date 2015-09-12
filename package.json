@@ -1,0 +1,14 @@
+{
+  "name": "boomlie",
+  "version": "1.0.0",
+  "description": "boomlie website - webstorm",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrei Morozov",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.5.2"
+  }
+}

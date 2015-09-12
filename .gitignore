@@ -1,0 +1,4 @@
+#ignore npm packages and bower components re-named to ext_resources.
+
+/node_modules
+/public/ext_resources
