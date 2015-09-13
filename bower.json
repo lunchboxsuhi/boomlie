@@ -1,0 +1,26 @@
+{
+  "name": "y",
+  "version": "y",
+  "homepage": "https://github.com/lunchboxsuhi/boomlie",
+  "authors": [
+    "lunxhboxsuhi <morozoandrei@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/ext_resources",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-bootstrap": "~0.13.4",
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5",
+    "fakeLoader": "fakeloader#*",
+    "ngActivityIndicator": "~0.1.10",
+    "ui-bootstrap": "~0.13.4"
+  }
+}
