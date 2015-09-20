@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('app').controller('mainCtrl', ['$activityIndicator', '$timeout',
+angular.module('app').controller(function($scope) {
 
-]);
+});

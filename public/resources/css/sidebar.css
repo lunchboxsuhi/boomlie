@@ -168,3 +168,8 @@
     margin-top: 25px;
     background-color: red;
 }
+
+.sidebar-nav > li > a.active {
+    background-color:#3366cc;
+    color:white;
+}

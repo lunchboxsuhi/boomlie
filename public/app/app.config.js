@@ -5,22 +5,29 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     //======================================
     //============ States =================
     //=====================================
+
+    var componentPath = 'app/components/';
+
     $stateProvider
         .state('home', {
         url: '/',
-        templateUrl: 'components/home/home.html'
+        templateUrl: componentPath + 'home/home.html'
         })
         .state('trending', {
             url: '/trending',
-            templateUrl: 'components/trending/trending.html'
+            templateUrl: componentPath + 'trending/trending.html'
         })
         .state('charts', {
             url: '/charts',
-            templateUrl: 'components/charts/charts.html'
+            templateUrl: componentPath + 'charts/charts.html'
         })
         .state('genre', {
             url: '/genre',
-            templateUrl: 'components/genre/genre.html'
+            templateUrl: componentPath + 'genre/genre.html'
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: componentPath + 'register/register.html'
         });
 
 

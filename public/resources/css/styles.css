@@ -4,8 +4,6 @@
     src: url('../fonts/HelveticaNeueLTCom-Md.ttf') format('truetype');
 }
 
-
-
 body {
     font-family: main;
 }
@@ -69,6 +67,10 @@ body {
     border-color: rgba(0, 0, 0, 0.7);   
 }
 
+#loginForm input {
+    margin-bottom: 15px;
+}
+
 /* top image for background */
 .background-image-top {
     background-image: url('../img/background_grayscaled_resized.jpg');
@@ -119,6 +121,19 @@ body {
     color: white;
 }
 
+.btn-warning-boomlie {
+    border-radius: 0;
+    background-color: #e38d13;
+    color: white;
+}
+
+.btn-warning-boomlie:hover,
+.btn-warning-boomlie:focus {
+    border-radius: 0;
+    background-color: #e39a30;
+    color: white;
+}
+
 .btn-demo li {
     margin-bottom: 15px;
 }
@@ -131,3 +146,41 @@ body {
     color: white;
     padding-left: 50px;
 }
+
+/* Register Page */
+.btn-register {
+    height: 150px;
+    width:100%;
+    font-size:32px;
+}
+
+.btn-register-info {
+    margin-bottom:5px;
+    height:60px;
+    font-size:32px;
+}
+
+.glyphicon-register {
+    font-size:32px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.sign-up-list {
+    font-size: 22px;
+}
+
+.sign-up-list > li > span {
+    width:100%;
+    height:100%;
+}
+
+.sign-up-list > li {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+
