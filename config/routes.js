@@ -17,7 +17,12 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect();
     });
-}
+
+    app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
+        res.send(req.user);
+    });
+
+};
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
