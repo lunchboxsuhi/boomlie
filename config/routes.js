@@ -4,11 +4,13 @@ module.exports = function(app, passport) {
        res.render('index.html');
     });
 
-    app.post('/api/signup', passport.authenticate('local-signup', {
-        successRedirect: '/',
-        failureRedirect: '/',
-        failureFlash: true
-    }));
+    app.post('/api/signup', passport.authenticate('local-signup'), function(req, res) {
+        res.send(req.user);
+    });
+
+    app.post('/api/testRequest', function(req, res) {
+        res.send('hit test');
+    });
 
     // Logout
     app.get('/api/logout', function(req, res) {

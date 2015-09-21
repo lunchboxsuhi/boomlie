@@ -27,7 +27,8 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
         })
         .state('register', {
             url: '/register',
-            templateUrl: componentPath + 'register/register.html'
+            templateUrl: componentPath + 'register/register.html',
+            controller: 'RegisterCtrl'
         });
 
 
