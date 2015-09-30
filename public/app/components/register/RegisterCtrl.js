@@ -1,5 +1,9 @@
 angular.module('app').controller('RegisterCtrl', ['$scope', '$http', function ($scope, $http) {
 
+    $scope.viewNum = 0;
+
+    $scope.buttons
+
     $scope.registerPost = function () {
         console.log($scope.registerEmail);
         console.log($scope.registerPassword);
@@ -18,5 +22,6 @@ angular.module('app').controller('RegisterCtrl', ['$scope', '$http', function ($
             .error(function (res) {
                 console.log('Error!');
             });
-    }
+    };
+
 }]);

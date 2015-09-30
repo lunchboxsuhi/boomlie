@@ -9,7 +9,9 @@
   "author": "Andrei Morozov",
   "license": "ISC",
   "devDependencies": {
-    "bower": "^1.5.2"
+    "bower": "^1.5.2",
+    "grunt-cli": "^0.1.13",
+    "grunt-reload": "^0.2.0"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

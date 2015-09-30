@@ -25,12 +25,12 @@ body {
 
 .navbar-inverse .navbar-nav > li > a {
     color: white;
-    
+
     font-size: 14px;
 }
 
 .navbar-nav li a,
-.navbar-form  {
+.navbar-form {
     line-height: 70px;
     height: 70px;
     padding-top: 0;
@@ -57,14 +57,14 @@ body {
     width: 100%;
     left: 0;
     text-align: center;
-    margin: auto;    
+    margin: auto;
 }
 
-.navbar-static-top, 
+.navbar-static-top,
 .sidebar-brand,
 #sidebar-wrapper ul li.sidebar-brand {
-    background-color: rgba(0, 0, 0, 0.7); 
-    border-color: rgba(0, 0, 0, 0.7);   
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: rgba(0, 0, 0, 0.7);
 }
 
 #loginForm input {
@@ -79,7 +79,7 @@ body {
     top: -150px;
     width: 100%;
     height: 100%;
-    background-repeat: no-repeat;    
+    background-repeat: no-repeat;
 }
 
 #page-content-wrapper {
@@ -89,10 +89,10 @@ body {
 #sidebar-wrapper ul li.sidebar-brand {
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 #sidebar-wrapper ul li {
     background-color: #eee;
 }
-
 
 /* Boomlie Buttons Custom */
 .btn-primary-boomlie {
@@ -104,7 +104,7 @@ body {
 .btn-primary-boomlie:hover,
 .btn-primary-boomlie:focus {
     border-radius: 0;
-    background-color:#3366ff;
+    background-color: #3366ff;
     color: white;
 }
 
@@ -140,7 +140,6 @@ body {
 
 /* buttons end styles */
 
-
 /*play pause nav player*/
 .playbar {
     color: white;
@@ -150,20 +149,38 @@ body {
 /* Register Page */
 .btn-register {
     height: 150px;
-    width:100%;
-    font-size:32px;
+    width: 100%;
+    font-size: 32px;
 }
 
 .btn-register-info {
-    margin-bottom:5px;
-    height:60px;
-    font-size:32px;
+    margin-bottom: 5px;
+    height: 60px;
+    font-size: 32px;
+}
+
+.register-active,
+.register-active:focus{
+    background-color: #3366cc;
+}
+
+.register-active:hover,
+.register-active:active {
+    background-color: #3366ff;
 }
 
 .glyphicon-register {
-    font-size:32px;
+    font-size: 32px;
     display: block;
     margin-bottom: 5px;
+}
+
+.sign-up-list > li > span.glyphicon-ok {
+    color: #1c9b16;
+}
+
+.sign-up-list > li > span.glyphicon-remove {
+    color: #b20000;
 }
 
 .sign-up-list {
@@ -171,8 +188,8 @@ body {
 }
 
 .sign-up-list > li > span {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 }
 
 .sign-up-list > li {
