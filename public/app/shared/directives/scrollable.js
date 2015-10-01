@@ -1,5 +1,6 @@
 angular.module('app').directive('scrollable',['$window', function($window) {
     return function(scope, elem, attrs) {
-        console.log(elem[0].clientHeight);
+        elem.height = "400px"
+        console.log(elem.height);
     }
 }]);
