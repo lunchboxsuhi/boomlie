@@ -1,6 +1,5 @@
-angular.module('app').directive('scrollable', function() {
+angular.module('app').directive('scrollable',['$window', function() {
     return function(scope, elem, attrs) {
-        elem.height($(window).height());
+        elem.height = $window.innerHeight;
     }
-
-})
+}]);
