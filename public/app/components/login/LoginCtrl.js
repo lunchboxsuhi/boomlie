@@ -16,4 +16,5 @@ angular.module('app').controller('LoginCtrl', ['$scope', '$http', function($scop
                 console.log(res);
             });
     }
+
 }]);

@@ -8,12 +8,12 @@
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-3">
-            <button class="btn btn-warning-boomlie btn-register">
+            <button class="btn btn-warning-boomlie btn-register" ng-click="viewNum=0"">
                 <span class="glyphicon glyphicon-user glyphicon-thumbs-up"></span>
                 Details
             </button>
             <hr />
-            <ul class="list-unstyled sign-up-list">
+            <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
                 <li class="list-group-item">Comment</li>
                 <li class="list-group-item">Donate To Artist or Group</li>
                 <li class="list-group-item">Buy Artist or Group content</li>
@@ -26,25 +26,25 @@
             </ul>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register">
+            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=1" ng-class="{'register-active' : viewNum == 1}">
                 <span class="glyphicon glyphicon-user glyphicon-register"></span>
                 Fan
             </button>
             <hr>
-                    <ul class="list-unstyled sign-up-list">
-                        <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
-                        <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
-                        <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
-                        <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
+                    <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
+                        <li><span class="glyphicon glyphicon-ok glyph-center "></span></li>
+                        <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
+                        <li><span class="glyphicon glyphicon-remove glyph-center"></span></li>
+                        <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
                     </ul>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register">
+            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=2" ng-class="{'register-active' : viewNum == 2}">
                 <span class="glyphicon glyphicon-envelope glyphicon-register"></span>
                 Artist
             </button>
             <hr>
-            <ul class="list-unstyled sign-up-list">
+            <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
                 <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
                 <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
                 <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
@@ -53,21 +53,24 @@
         </div>
 
         <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register">
+            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=3" ng-class="{'register-active' : viewNum == 3}">
                 <span class="glyphicon glyphicon-gift glyphicon-register"></span>
                 Group
             </button>
             <hr>
+            <div ng-show="viewNum == 0">
             <p>stuff and information can go inside of here that can explain exactly what the Fan is able to do</p>
             <p>stuff and information can go inside of here that can explain exactly what the Fan is able to do</p>
+            </div>
         </div>
     </div>
 </div>
-<hr/>
+
+
 
 <!-- Hide this, perhaps use a wizard? -->
-<div class="row">
-    <form ng-submit="registerPost()" name="registerForm" class="col-md-4 col-md-offset-3 registerForm">
+<div class="row" ng-show="viewNum == 1">
+    <form ng-submit="registerPost()" name="registerForm" class="col-md-4 col-md-offset-4 registerForm">
         <div class="form-group">
             <label for="registerEmail" class="control-label">Email</label>
             <input type="email" placeholder="email" class="form-control" ng-model="registerEmail" id="registerEmail">
@@ -81,6 +84,51 @@
         <div class="form-group">
             <label for="registerPasswordRepeat" class="control-label">Re-Enter Password</label>
             <input type="password" placeholder="Re-Enter Password" class="form-control" id="registerPasswordRepeat"/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>
+        </div>
+    </form>
+</div>
+
+
+<div class="row" id="artistForm" ng-show="viewNum == 2">
+    <form ng-submit="registerPost()" name="registerForm" class="col-md-4 col-md-offset-4 registerForm">
+        <div class="form-group">
+            <label for="registerEmail" class="control-label">Email</label>
+            <input type="email" placeholder="email" class="form-control" ng-model="registerEmail" id="">
+        </div>
+
+        <div class="form-group">
+            <label for="registerPassword" class="control-label">Password</label>
+            <input type="password" placeholder="Password Artist" class="form-control" ng-model="registerPassword" id=""/>
+        </div>
+
+        <div class="form-group">
+            <label for="registerPasswordRepeat" class="control-label">Re-Enter Password</label>
+            <input type="password" placeholder="Re-Enter Password" class="form-control" id=""/>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>
+        </div>
+    </form>
+</div>
+
+<div class="row" id="groupForm" ng-show="viewNum == 3">
+    <form ng-submit="registerPost()" name="registerForm" class="col-md-4 col-md-offset-3 registerForm">
+        <div class="form-group">
+            <label for="registerEmail" class="control-label">Email</label>
+            <input type="email" placeholder="email" class="form-control" ng-model="registerEmail" id="">
+        </div>
+
+        <div class="form-group">
+            <label for="registerPassword" class="control-label">Password</label>
+            <input type="password" placeholder="Password Artist" class="form-control" ng-model="registerPassword" id=""/>
+        </div>
+
+        <div class="form-group">
+            <label for="registerPasswordRepeat" class="control-label">Re-Enter Password</label>
+            <input type="password" placeholder="Re-Enter Password" class="form-control" id=""/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>

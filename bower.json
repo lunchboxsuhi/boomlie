@@ -18,6 +18,7 @@
     "angular": "~1.4.5",
     "angular-bootstrap": "~0.13.4",
     "angular-ui-router": "~0.2.15",
+    "angular-wizard": "~0.5.5",
     "bootstrap": "~3.3.5",
     "ngActivityIndicator": "~0.1.10",
     "ui-bootstrap": "~0.13.4"
