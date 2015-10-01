@@ -20,10 +20,10 @@
         <div ng-include="'app/shared/navbar.html'"></div>
 
         <!-- main content rendered -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" scrollable>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" id="scrollArea">
                         <div ui-view></div>
                     </div>
                 </div>
@@ -44,11 +44,13 @@
     <script type="text/javascript" src="app/app.config.js"></script>
 
     <!-- controllers -->
-    <script type="text/javascript" src="app/shared/mainCtrl.js"></script>
+    <script type="text/javascript" src="app/shared/MainCtrl.js"></script>
     <script type="text/javascript" src="app/shared/NavbarCtrl.js"></script>
     <script type="text/javascript" src="app/components/register/RegisterCtrl.js"></script>
     <script type="text/javascript" src="app/components/login/LoginCtrl.js"></script>
 
+    <!-- directives -->
+    <script type="text/javascript" src="app/shared/scrollable.js"></script>
     <!-- TODO: use ngActivityIndicator instead to avoid having jquery -->
     <!--<script type="text/javascript">
     $('#fakeloader').fakeLoader({

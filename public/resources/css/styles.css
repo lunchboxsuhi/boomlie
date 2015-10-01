@@ -7,6 +7,9 @@
 body {
     font-family: main;
 }
+#scrollArea {
+    overflow: auto;
+}
 
 .main-wrapper {
     float: left;
@@ -84,6 +87,7 @@ body {
 
 #page-content-wrapper {
     background-color: rgba(255, 255, 255, 1);
+    overflow-y: scroll;
 }
 
 #sidebar-wrapper ul li.sidebar-brand {

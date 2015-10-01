@@ -19,8 +19,11 @@
     "angular-bootstrap": "~0.13.4",
     "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.3.5",
-    "fakeLoader": "fakeloader#*",
     "ngActivityIndicator": "~0.1.10",
     "ui-bootstrap": "~0.13.4"
-  }
+  },
+  "description": "y",
+  "main": "",
+  "moduleType": [],
+  "private": true
 }
