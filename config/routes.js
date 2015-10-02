@@ -1,11 +1,31 @@
 module.exports = function(app, passport) {
 
+    var User = require('../models/user.js');
+
     app.get('/', function(req, res) {
        res.render('index.html');
     });
 
-    app.post('/api/signup', passport.authenticate('local-signup'), function(req, res) {
-        res.send(req.user);
+    app.post('/api/signup', function(req, res) {
+
+        var user = req.body;
+
+        //create new user based on the form
+        var newUser = new User({
+            //accountType: user.firstName,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            password: user.password,
+            location: {
+                country: user.country,
+                city: user.city
+            }
+        });
+
+        console.log(newUser);
+
+        //save the user to the database
+        //newUser.save();
     });
 
     app.post('/api/testRequest', function(req, res) {

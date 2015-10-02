@@ -10,8 +10,14 @@ angular.module('app').controller('RegisterCtrl', ['$scope', '$http', function ($
 
         //send post to api/register with the form information
         var user = {
-            email: $scope.registerEmail,
-            password: $scope.password
+            //accountType -- do if earlier to check
+            firstName: $scope.fanFirstName,
+            lastName: $scope.fanLastName,
+            password: $scope.fanPassword,
+            location: {
+                country: $scope.country,
+                city: $scope.city
+            }
         };
 
         //send post to get authenticated

@@ -21,7 +21,8 @@
     "angular-wizard": "~0.5.5",
     "bootstrap": "~3.3.5",
     "ngActivityIndicator": "~0.1.10",
-    "ui-bootstrap": "~0.13.4"
+    "ui-bootstrap": "~0.13.4",
+    "components-font-awesome": "~4.4.0"
   },
   "description": "y",
   "main": "",
