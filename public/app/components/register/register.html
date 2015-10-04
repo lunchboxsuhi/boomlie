@@ -8,11 +8,11 @@
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-3">
-            <button class="btn btn-warning-boomlie btn-register" ng-click="viewNum=0"">
+            <button class="btn btn-warning-boomlie btn-register" ng-click="viewNum=0">
                 <span class="glyphicon glyphicon-user glyphicon-thumbs-up"></span>
                 Details
             </button>
-            <hr />
+            <hr/>
             <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
                 <li class="list-group-item">Comment</li>
                 <li class="list-group-item">Donate To Artist or Group</li>
@@ -26,21 +26,23 @@
             </ul>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=1" ng-class="{'register-active' : viewNum == 1}">
-                <span class="glyphicon glyphicon-user glyphicon-register"></span>
+            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=1"
+                    ng-class="{'register-active' : viewNum == 1}">
+                <span class="fa fa-heart glyphicon-register"></span>
                 Fan
             </button>
             <hr>
-                    <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
-                        <li><span class="glyphicon glyphicon-ok glyph-center "></span></li>
-                        <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
-                        <li><span class="glyphicon glyphicon-remove glyph-center"></span></li>
-                        <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
-                    </ul>
+            <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
+                <li><span class="glyphicon glyphicon-ok glyph-center "></span></li>
+                <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
+                <li><span class="glyphicon glyphicon-remove glyph-center"></span></li>
+                <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
+            </ul>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=2" ng-class="{'register-active' : viewNum == 2}">
-                <span class="glyphicon glyphicon-envelope glyphicon-register"></span>
+            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=2"
+                    ng-class="{'register-active' : viewNum == 2}">
+                <span class="glyphicon glyphicon-user glyphicon-register"></span>
                 Artist
             </button>
             <hr>
@@ -52,61 +54,150 @@
             </ul>
         </div>
 
-        <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=3" ng-class="{'register-active' : viewNum == 3}">
-                <span class="glyphicon glyphicon-gift glyphicon-register"></span>
+        <div class="col-md-3" >
+            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=3"
+                    ng-class="{'register-active' : viewNum == 3}" style="background-color: darkred;" disabled>
+                <span class="fa fa-users glyphicon-register"></span>
                 Group
+                <small class="text-small">Coming soon</small>
             </button>
             <hr>
             <div ng-show="viewNum == 0">
-            <p>stuff and information can go inside of here that can explain exactly what the Fan is able to do</p>
-            <p>stuff and information can go inside of here that can explain exactly what the Fan is able to do</p>
+                <p>stuff and information can go inside of here that can explain exactly what the Fan is able to do</p>
+
+                <p>stuff and information can go inside of here that can explain exactly what the Fan is able to do</p>
             </div>
         </div>
     </div>
 </div>
 
 
+<!-- Register Form and Wizard form Fan -->
+<div class="row register-form" ng-show="viewNum == 1">
+    <form ng-submit="registerUser()" name="fan" class="col-md-8 col-md-offset-2 registerForm">
+        <wizard>
+            <wz-step title="Account Credentials">
+                <div class="form-group">
+                    <label for="fanEmail" class="control-label">Email</label>
+                    <input type="email" class="form-control" ng-model="fan.email" id="fanEmail">
+                </div>
 
-<!-- Hide this, perhaps use a wizard? -->
-<div class="row" ng-show="viewNum == 1">
-    <form ng-submit="registerPost()" name="registerForm" class="col-md-4 col-md-offset-4 registerForm">
-        <div class="form-group">
-            <label for="registerEmail" class="control-label">Email</label>
-            <input type="email" placeholder="email" class="form-control" ng-model="registerEmail" id="registerEmail">
-        </div>
+                <div class="form-group">
+                    <label for="fanEmailRepeat" class="control-label">re-type</label>
+                    <input type="email" class="form-control" id="fanEmailRepeat">
+                </div>
 
-        <div class="form-group">
-            <label for="registerPassword" class="control-label">Password</label>
-            <input type="password" placeholder="Password" class="form-control" ng-model="registerPassword" id="registerPassword"/>
-        </div>
+                <div class="form-group">
+                    <label for="fanPassword" class="control-label">Password</label>
+                    <input type="password" class="form-control" ng-model="fan.password" id="fanPassword"/>
+                </div>
 
-        <div class="form-group">
-            <label for="registerPasswordRepeat" class="control-label">Re-Enter Password</label>
-            <input type="password" placeholder="Re-Enter Password" class="form-control" id="registerPasswordRepeat"/>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>
-        </div>
+                <div class="form-group">
+                    <label for="fanPasswordRepeat" class="control-label">Re-Enter Password</label>
+                    <input type="password" class="form-control" id="fanPasswordRepeat"/>
+                </div>
+
+                <input type="submit" wz-next ng-click="accountCredentials()" class="btn btn-primary-boomlie btn-block"
+                       value="Next"/>
+            </wz-step>
+
+            <wz-step title="Account Information">
+                <div class="form-group">
+                    <label for="fanFirstName" class="control-label">First Name</label>
+                    <input type="text" class="form-control" ng-model="fan.firstName" id="fanFirstName"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="fanLastName" class="control-label">Last Name</label>
+                    <input type="text" class="form-control" ng-model="fan.lastName" id="fanLastName"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="fanCountry" class="control-label">Country</label>
+                    <input type="text" class="form-control" ng-model="fan.location.country" id="fanCountry"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="fanCity" class="control-label">City</label>
+                    <input type="text" class="form-control" ng-model="fan.location.city" id="fanCity"/>
+                </div>
+
+                <div ng-controller="DatePickerCtrl">
+                    <label for="fanDateOfBirth" class="control-label">Date of Birth</label>
+
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt"
+                               is-open="status.opened" min-date="minDate" max-date="maxDate" placeholder="YYYY/MM/DD"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"
+                               close-text="Close" id="fanDateOfBirth"/>
+                    <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                    </span>
+                    </p>
+                </div>
+                <input type="submit" class="btn btn-primary-boomlie btn-block" ng-click="accountInfo()" wz-next
+                       value="Next"/>
+            </wz-step>
+
+            <wz-step title="Review & Submit">
+                <h3>Review your information</h3>
+                <div class="register-review">
+                    <div class="row">
+                        <div class="col-md-3"><b>Email:</b></div>
+                        <div class="col-md-5"><b>{{ fan.email }}</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><b>First Name:</b></div>
+                        <div class="col-md-5"><b>{{ fan.firstName }}</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><b>Last Name:</b></div>
+                        <div class="col-md-5"><b>{{ fan.lastName }}</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><b>Date of Birth:</b></div>
+                        <div class="col-md-5"><b>{{ dt }}</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><b>Country:</b></div>
+                        <div class="col-md-5"><b>{{ fan.location.country }}</b></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"><b>City:</b></div>
+                        <div class="col-md-5"><b>{{ fan.location.city }}</b></div>
+                    </div>
+                </div>
+                <br/>
+                </wz-step>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>
+                </div>
+            </wz-step>
+
+            <!-- upload photo -->
+        </wizard>
     </form>
 </div>
 
-
+<!--
 <div class="row" id="artistForm" ng-show="viewNum == 2">
-    <form ng-submit="registerPost()" name="registerForm" class="col-md-4 col-md-offset-4 registerForm">
+    <form ng-submit="registerArtist()" name="registerForm" class="col-md-4 col-md-offset-4 registerForm">
         <div class="form-group">
-            <label for="registerEmail" class="control-label">Email</label>
-            <input type="email" placeholder="email" class="form-control" ng-model="registerEmail" id="">
+            <label for="artistEmail" class="control-label">Email</label>
+            <input type="email" placeholder="email" class="form-control" ng-model="artistEmail" id="artistEmail">
         </div>
 
         <div class="form-group">
-            <label for="registerPassword" class="control-label">Password</label>
-            <input type="password" placeholder="Password Artist" class="form-control" ng-model="registerPassword" id=""/>
+            <label for="artistPassword" class="control-label">Password</label>
+            <input type="password" placeholder="Password Artist" class="form-control" ng-model="artistPassword"
+                   id="artistPassword"/>
         </div>
 
         <div class="form-group">
-            <label for="registerPasswordRepeat" class="control-label">Re-Enter Password</label>
-            <input type="password" placeholder="Re-Enter Password" class="form-control" id=""/>
+            <label for="artistPasswordRepeat" class="control-label">Re-Enter Password</label>
+            <input type="password" placeholder="Re-Enter Password" class="form-control" id="artistPasswordRepeat"/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>
@@ -115,23 +206,26 @@
 </div>
 
 <div class="row" id="groupForm" ng-show="viewNum == 3">
-    <form ng-submit="registerPost()" name="registerForm" class="col-md-4 col-md-offset-3 registerForm">
+    <form ng-submit="registerGroup()" name="registerForm" class="col-md-4 col-md-offset-4 registerForm">
         <div class="form-group">
-            <label for="registerEmail" class="control-label">Email</label>
-            <input type="email" placeholder="email" class="form-control" ng-model="registerEmail" id="">
+            <label for="groupMasterEmail" class="control-label">Master-Email</label>
+            <input type="email" placeholder="email" class="form-control" ng-model="groupMasterEmail"
+                   id="groupMasterEmail">
         </div>
 
         <div class="form-group">
-            <label for="registerPassword" class="control-label">Password</label>
-            <input type="password" placeholder="Password Artist" class="form-control" ng-model="registerPassword" id=""/>
+            <label for="groupMasterPassword" class="control-label">Password</label>
+            <input type="password" placeholder="Password Artist" class="form-control" ng-model="groupMasterPassword"
+                   id="groupMasterPassword"/>
         </div>
 
         <div class="form-group">
-            <label for="registerPasswordRepeat" class="control-label">Re-Enter Password</label>
-            <input type="password" placeholder="Re-Enter Password" class="form-control" id=""/>
+            <label for="groupMasterPasswordRepeat" class="control-label">Re-Enter Password</label>
+            <input type="password" placeholder="Re-Enter Password" class="form-control" id="groupMasterPasswordRepeat"/>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>
         </div>
     </form>
 </div>
+-->

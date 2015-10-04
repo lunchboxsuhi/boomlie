@@ -1,3 +1,3 @@
 module.exports = {
-    'url': 'mongodb://master:admin@ds031223.mongolab.com:31223/jobfinder'
+    'url': 'mongodb://master:Passw0rd@ds029224.mongolab.com:29224/boomlie'
 };

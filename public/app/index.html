@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>boomlie</title>
 
+    <!-- style frameworks -->
     <link rel="stylesheet" href="../ext_resources/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../ext_resources/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="ext_resources/angular-wizard/dist/angular-wizard.min.css">
+
+
     <!-- <link rel="stylesheet" href="../ext_resources/fakeLoader/fakeLoader.css"> -->
+    <!-- custom css -->
     <link rel="stylesheet" href="../resources/css/styles.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
 </head>
@@ -16,14 +22,14 @@
     <div class="background-image-top"></div>
     <div id="wrapper">
         <!-- sidebar rendered-->
-        <div ng-include="'app/shared/sidebar.html'"></div>
-        <div ng-include="'app/shared/navbar.html'"></div>
+        <div ng-include="'app/shared/views/sidebar.html'"></div>
+        <div ng-include="'app/shared/views/navbar.html'"></div>
 
         <!-- main content rendered -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" scrollable>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" id="scrollArea">
                         <div ui-view></div>
                     </div>
                 </div>
@@ -33,22 +39,31 @@
 
     <!-- scripts to be loaded once DOM is finished -->
     <script type="text/javascript" src="../ext_resources/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../ext_resources/underscore/underscore-min.js"></script>
+
     <!-- <script type="text/javascript" src="../ext_resources/fakeLoader/fakeLoader.js"></script> -->
 
     <!-- angular add-ons -->
-    <script type="text/javascript" src="../ext_resources/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="../ext_resources/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="ext_resources/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="ext_resources/angular-bootstrap/ui-bootstrap.js"></script>
+    <script type="text/javascript" src="ext_resources/angular-wizard/dist/angular-wizard.js"></script>
+
+    <!-- inject bootstrap components into cache -->
+    <script type="text/javascript" src="ext_resources/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
     <!-- angular app files -->
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="app/app.config.js"></script>
 
     <!-- controllers -->
-    <script type="text/javascript" src="app/shared/MainCtrl.js"></script>
-    <script type="text/javascript" src="app/shared/NavbarCtrl.js"></script>
+    <script type="text/javascript" src="app/shared/controllers/MainCtrl.js"></script>
+    <script type="text/javascript" src="app/shared/controllers/NavbarCtrl.js"></script>
     <script type="text/javascript" src="app/components/register/RegisterCtrl.js"></script>
     <script type="text/javascript" src="app/components/login/LoginCtrl.js"></script>
+    <script type="text/javascript" src="app/shared/controllers/DatePickerCtrl.js"></script>
 
+    <!-- directives -->
+    <script type="text/javascript" src="app/shared/directives/scrollable.js"></script>
     <!-- TODO: use ngActivityIndicator instead to avoid having jquery -->
     <!--<script type="text/javascript">
     $('#fakeloader').fakeLoader({

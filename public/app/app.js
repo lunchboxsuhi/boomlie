@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('app', ['ui.router', 'ui.bootstrap', 'ngActivityIndicator']);
+angular.module('app', ['ui.router', 'ui.bootstrap', 'mgo-angular-wizard']);

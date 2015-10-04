@@ -7,6 +7,9 @@
 body {
     font-family: main;
 }
+#scrollArea {
+    overflow: auto;
+}
 
 .main-wrapper {
     float: left;
@@ -84,6 +87,7 @@ body {
 
 #page-content-wrapper {
     background-color: rgba(255, 255, 255, 1);
+    overflow-y: scroll;
 }
 
 #sidebar-wrapper ul li.sidebar-brand {
@@ -148,7 +152,7 @@ body {
 
 /* Register Page */
 .btn-register {
-    height: 150px;
+    height: 100px;
     width: 100%;
     font-size: 32px;
 }
@@ -171,7 +175,7 @@ body {
 
 .glyphicon-register {
     font-size: 32px;
-    display: block;
+
     margin-bottom: 5px;
 }
 
@@ -197,7 +201,28 @@ body {
     margin-right: auto;
 }
 
+.register-form {
+    background-color: #0f0f0f;
+    padding-top:25px;
+    padding-bottom: 25px;
+    margin: 0 auto;
+    width:50%;
+    border-radius: 4px;
+}
 
+.register-form label {
+    color: white;
+    text-transform: uppercase;
+}
 
+.text-small {
+    font-size: 15px;
+    display: block;
+}
+
+.register-review { color: white;}
+.register-review b {
+    text-transform: capitalize;
+}
 
 

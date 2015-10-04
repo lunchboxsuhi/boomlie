@@ -14,7 +14,6 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
-
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -28,7 +27,7 @@ app.use(bodyParser.urlencoded( { extended:true })); //get url-encoding?
 
 //express third party routing
 app.use(express.static(__dirname + '/public'));
-app.set('views', __dirname + '/public/app');
+app.set('views', [__dirname + '/public/app', __dirname + '/public/ext_resources', __dirname + '/public/ext_resources/ui-bootstrap']);
 app.engine('html', require('ejs').renderFile);
 
 // required for passport
