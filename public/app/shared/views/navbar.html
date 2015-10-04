@@ -18,20 +18,18 @@
 
     <!-- Navigation-->
     <div class="container-fluid">
-
         <ul class="navbar-nav nav navbar-right">
             <li><a ui-sref="#">Upload</a></li>
             <li><a ui-sref="#">...</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown" dropdown>
-                <a class="dropdown-toggle" dropdown-toggle>My Profile</a>
+                <a class="dropdown-toggle" dropdown-toggle>Account</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    <li><a ui-sref="profile">Profile</a></li>
+                    <li><a ui-sref="messages">Mailbox <span class="badge">4</span></a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">Edit Profile <span class="glyphicon glyphicon-cog"></span></a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">One more separated link</a></li>
                 </ul>

@@ -1,34 +1,37 @@
-angular.module('app').controller('RegisterCtrl', ['$scope', '$http', function ($scope, $http) {
+angular.module('app').controller('RegisterCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
     $scope.viewNum = 0;
-    console.log('loaded register ctrl');
+    var accType = "Fan";
 
-    $scope.accountCredentials = function() {
-        console.log($scope.fan.email);
-       // console.log($scope.fan.firstName);
-    };
+    //submit register form for for
+    $scope.registerUser = function () {
 
-    $scope.registerUser = function() {
+        if ($scope.viewNum == 1) accType = "Fan";
+        if ($scope.viewNum == 2) accType = "Artist";
+        if ($scope.viewNum == 3) accType = "Group";
 
         var newUser = {
+            accountType: accType,
             email: $scope.fan.email,
             password: $scope.fan.password,
             firstName: $scope.fan.firstName,
             lastName: $scope.fan.lastName,
-            DOB: $scope.dt,
+            DOB: $scope.fan.dt,
             location: {
-                country: $scope.fan.country,
-                city: $scope.fan.city
+                country: $scope.fan.location.country,
+                city: $scope.fan.location.city
             }
         };
+        console.log(newUser);
 
         //send post to get authenticated
         $http.post('/api/signup', newUser)
             .success(function (res) {
-                console.log(res);
+                console.log("success register user" + res);
+                console.log("YYAYYYAYAYAYA");
             })
             .error(function (res) {
-                console.log('Error!');
+                console.log('Error! - Unable to register User');
             });
     };
 }]);

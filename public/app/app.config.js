@@ -29,6 +29,16 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
             url: '/register',
             templateUrl: componentPath + 'register/register.html',
             controller: 'RegisterCtrl'
+        })
+        .state('profile', {
+            url: '/profile',
+            templateUrl: componentPath + '/profile/profile.html',
+            controller: 'ProfileCtrl'
+        })
+        .state('messages', {
+            url: '/messgaes',
+            templateUrl: componentPath + '/messages/messages.html',
+            controller: 'MessagesCtrl'
         });
 
 

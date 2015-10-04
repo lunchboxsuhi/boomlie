@@ -7,12 +7,11 @@ module.exports = function(app, passport) {
     });
 
     app.post('/api/signup', function(req, res) {
-
         var user = req.body;
-
-        //create new user based on the form
         var newUser = new User({
             //accountType: user.firstName,
+            accountType: user.accountType,
+            email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
             password: user.password,
@@ -22,13 +21,14 @@ module.exports = function(app, passport) {
                 city: user.city
             }
         });
-
         console.log(newUser);
-
+        //console.log(newUser);
         //save the user to the database
-        newUser.save(function(err) {
+        /*newUser.save(function(err) {
             if (err) throw err;
-        });
+
+            console.log("Successfully create user " + user.email);
+        });*/
     });
 
     app.post('/api/testRequest', function(req, res) {
