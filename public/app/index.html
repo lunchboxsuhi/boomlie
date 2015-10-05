@@ -40,6 +40,15 @@
 
     <!-- scripts to be loaded once DOM is finished -->
     <script type="text/javascript" src="../ext_resources/jquery/dist/jquery.js"></script>
+
+    <script>
+        $('#fakeloader').fakeLoader({
+            timeToHide: 1500,
+            bgColor: 'black',
+            spinner: 'spinner6'
+        });
+    </script>
+
     <script type="text/javascript" src="ext_resources/angular/angular.min.js"></script>
     <script type="text/javascript" src="ext_resources/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="../ext_resources/fakeLoader/fakeLoader.min.js"></script>
@@ -70,13 +79,7 @@
     <script type="text/javascript" src="app/shared/directives/scrollable.js"></script>
 
 
-    <script>
-        $('#fakeloader').fakeLoader({
-            timeToHide: 1500,
-            bgColor: 'black',
-            spinner: 'spinner6'
-        });
-    </script>
+
 
 
 </body>
