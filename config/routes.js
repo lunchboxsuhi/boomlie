@@ -1,4 +1,4 @@
-module.exports = function(app, passport) {
+module.exports = function(app, passport, jwt) {
 
     var User = require('../models/user.js');
 
@@ -17,18 +17,19 @@ module.exports = function(app, passport) {
             password: user.password,
             DOB: user.DOB,
             location: {
-                country: user.country,
-                city: user.city
+                country: user.location.country,
+                city: user.location.city
             }
         });
         console.log(newUser);
-        //console.log(newUser);
+
         //save the user to the database
-        /*newUser.save(function(err) {
+        newUser.save(function(err) {
             if (err) throw err;
 
             console.log("Successfully create user " + user.email);
-        });*/
+            res.send(newUser);
+        });
     });
 
     app.post('/api/testRequest', function(req, res) {
@@ -41,10 +42,41 @@ module.exports = function(app, passport) {
         res.redirect();
     });
 
+    /*
     app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
         res.send(req.user);
-    });
+    });*/
 
+    app.post('/api/authenticate', function(req, res) {
+       User.findOne(
+           {
+               email: req.body.email
+           }, function(err, user) {
+               if (err) throw err;
+
+               console.log(user);
+               if (!user) {
+                   res.json({success: false, message: 'Authentication failed. User not found.'});
+               } else if (user) {
+                   if (user.password != req.body.password) {
+                       res.json({ success: false, message: 'Authentication failed. Wrong password.'});
+                   }
+                   else {
+                       var token = jwt.sign(user, app.get('superSecret'), {
+                           expiresInMinutes: 1440
+                       });
+
+                       res.json({
+                           success: true,
+                           message: 'Enjoy the token',
+                           token: token
+                       })
+
+                       console.log("Token output is " + JSON.stringify(jwt.verify(token, app.get('superSecret')), null, 3));
+                   }
+               }
+           });
+    });
 };
 
 function isLoggedIn(req, res, next) {

@@ -1,18 +1,20 @@
 <div class="row" ng-controller="LoginCtrl">
     <div class="col-md-12">
-        <form id="loginForm" ng-click="$event.stopPropagation()" ng-submit="login()">
+        <form id="loginForm" ng-click="$event.stopPropagation()" name="login" ng-submit="loginForm()">
             <div class="form-group">
                 <label for="loginEmail">E-Mail</label>
-                <input id="loginEmail" ng-model="loginEmail" type="email" class="form-control"
+                <input id="loginEmail" ng-model="login.email" type="email" class="form-control"
                        placeholder="example@domain.com">
             </div>
+
             <div class="form-group">
                 <label for="loginPassword">Password</label>
-                <input id="loginPassword" ng-model="loginPassword" type="password" class="form-control"
+                <input id="loginPassword" ng-model="login.password" type="password" class="form-control"
                        placeholder="password">
             </div>
 
             <hr/>
+
             <div class="form-group">
                 <button class="btn btn-default-boomlie btn-block">Login</button>
                 <button ui-sref="register" class="btn btn-default-boomlie btn-block">Register

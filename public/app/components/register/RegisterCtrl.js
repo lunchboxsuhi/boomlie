@@ -22,15 +22,18 @@ angular.module('app').controller('RegisterCtrl', ['$scope', '$http', '$location'
                 city: $scope.fan.location.city
             }
         };
+
         console.log(newUser);
 
         //send post to get authenticated
         $http.post('/api/signup', newUser)
-            .success(function (res) {
-                console.log("success register user" + res);
+            .then(function (res) {
+                console.log("success register user: " + JSON.stringify(res, null, 3));
+                console.log("email: " + res.data.email);
+                console.log("email2: " + res.data.email + "  " + res.data._id);
                 console.log("YYAYYYAYAYAYA");
-            })
-            .error(function (res) {
+            },
+            function (res) {
                 console.log('Error! - Unable to register User');
             });
     };

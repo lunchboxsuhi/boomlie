@@ -1,19 +1,23 @@
-angular.module('app').controller('LoginCtrl', ['$scope', '$http', function($scope, $http) {
+angular.module('app').controller('LoginCtrl', ['$scope', '$http', '$window',  function($scope, $http, $window) {
 
     //Login Form is clicked
-    $scope.login = function() {
+    $scope.loginForm = function() {
 
         var user = {
-            email: $scope.loginEmail,
-            password: $scope.loginPassword
+            email: $scope.login.email,
+            password: $scope.login.password
         };
 
-        $http.post('/api/login', user)
+        console.log(user);
+
+        $http.post('/api/authenticate', user)
             .success(function(res) {
-                console.log(res);
+                $window.sessionStorage.token = res.token;
+                console.log(res.token);
             })
             .error(function(res) {
-                console.log(res);
+                delete $window.sessionStorage.token;
+                console.log('error no login');
             });
     }
 
