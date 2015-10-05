@@ -8,19 +8,17 @@
     <!-- style frameworks -->
     <link rel="stylesheet" href="../ext_resources/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../ext_resources/components-font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="ext_resources/angular-wizard/dist/angular-wizard.min.css">
-    <!-- <link rel="stylesheet" href="ext_resources/ngActivityIndicator/css/ngActivityIndicator.css"> -->
-
-
+    <link rel="stylesheet" href="../ext_resources/angular-wizard/dist/angular-wizard.min.css">
     <link rel="stylesheet" href="../ext_resources/fakeLoader/fakeLoader.css">
+
     <!-- custom css -->
-    <link rel="stylesheet" href="../resources/css/styles.css">
+    <link rel="stylesheet" href="../resources/css/styles.css" >
     <link rel="stylesheet" href="../resources/css/sidebar.css">
 </head>
 <body ng-controller="MainCtrl" ng-cloak>
     <div id="fakeloader"></div>
 
-    <div class="background-image-top"></div>
+    <div id="bg-img"></div>
     <div id="wrapper">
         <!-- sidebar rendered-->
         <div ng-include="'app/shared/views/sidebar.html'"></div>
@@ -47,8 +45,10 @@
             bgColor: 'black',
             spinner: 'spinner6'
         });
+        $(document).ready(function() {
+            $('#bg-img').addClass('background-image-top');
+        })
     </script>
-
     <script type="text/javascript" src="ext_resources/angular/angular.min.js"></script>
     <script type="text/javascript" src="ext_resources/underscore/underscore-min.js"></script>
 
@@ -75,7 +75,6 @@
     <script type="text/javascript" src="app/components/mailbox/MailboxCtrl.js"></script>
 
     <!-- directives -->
-
     <script type="text/javascript" src="app/shared/directives/scrollable.js"></script>
 
 
