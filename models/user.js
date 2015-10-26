@@ -10,6 +10,7 @@ var userSchema = mongoose.Schema({
     firstName:      String,
     lastName:       String,
     password:       String,
+    imagePath:      String,
     DOB:            Date,
     location: {
         country:    String,

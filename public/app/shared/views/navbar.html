@@ -34,20 +34,21 @@
                     <li><a href="#">One more separated link</a></li>
                 </ul>
             </li>
-            <li class="dropdown" dropdown>
+            <li class="dropdown" dropdown ng-show="!user.loggedIn">
                 <a class="dropdown-toggle" dropdown-toggle>Login</a>
                 <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
                     <li>
-
                         <div ng-include="'app/components/login/login.html'"></div>
-
                     </li>
-                    <li class="divider"></li>
+                    <!--<li class="divider"></li>
                     <li>
                         <input type="button" class="btn btn-warning-boomlie btn-block" value="Login With Google">
                         <input type="button" class="btn  btn-primary-boomlie btn-block" value="Login with Facebook">
-                    </li>
+                    </li>-->
                 </ul>
+            </li>
+            <li ng-show="user.loggedIn">
+                <a href="#" ng-click="logout()">Logout</a>
             </li>
         </ul>
     </div>

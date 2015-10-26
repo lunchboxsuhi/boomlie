@@ -26,15 +26,15 @@ angular.module('app').controller('RegisterCtrl', ['$scope', '$http', '$location'
         console.log(newUser);
 
         //send post to get authenticated
-        $http.post('/api/signup', newUser)
+        $http.post('/signup', newUser)
             .then(function (res) {
-                console.log("success register user: " + JSON.stringify(res, null, 3));
-                console.log("email: " + res.data.email);
-                console.log("email2: " + res.data.email + "  " + res.data._id);
-                console.log("YYAYYYAYAYAYA");
+                $location.path('/');
             },
             function (res) {
                 console.log('Error! - Unable to register User');
             });
     };
+
+
+
 }]);

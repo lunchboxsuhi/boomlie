@@ -42,11 +42,6 @@ module.exports = function(app, passport, jwt) {
         res.redirect();
     });
 
-    /*
-    app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
-        res.send(req.user);
-    });*/
-
     app.post('/api/authenticate', function(req, res) {
        User.findOne(
            {
