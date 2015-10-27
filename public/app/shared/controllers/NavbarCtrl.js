@@ -13,6 +13,6 @@ angular.module('app').controller('NavbarCtrl',
         $location.path('/');
         console.log('loggedout');
         $scope.user.loggedIn = authentication.isAuthenticated();
-        toastr.info('Logged out successfully', 'Bye!');
+        toastr.success('Logged out successfully', 'Bye!', {iconClass:'toastr-logout toast-success'});
     }
 }]);

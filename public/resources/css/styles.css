@@ -225,6 +225,6 @@ body {
     text-transform: capitalize;
 }
 
-#toast-container {
-
+.toastr-logout {
+    background-color: #2980b9 !important;
 }

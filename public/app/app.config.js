@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+angular.module('app').config(['$stateProvider', '$urlRouterProvider', 'toastrConfig', function($stateProvider, $urlRouterProvider, toastrConfig) {
 
     //======================================
     //============ States =================
@@ -44,5 +44,13 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
 
     //send to home page if this is not work
     $urlRouterProvider.otherwise('/');
+
+
+    //config tostr
+    angular.extend(toastrConfig, {
+        autoDismiss: true,
+        positionClass: 'toast-bottom-right',
+        maxOpened: 5
+    });
 
 }]);
