@@ -173,3 +173,9 @@
     background-color:#3366cc;
     color:white;
 }
+
+.boomlieTitle-font {
+    font-family: 'boomlie-title';
+    color: white;
+    font-size: 15em;
+}

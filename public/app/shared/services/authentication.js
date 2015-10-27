@@ -13,7 +13,9 @@ angular.module('app').factory('authentication', function ($http, $q, $window) {
             });
     };
 
-    //authenticated just checks to see if the token is alive
+    // ** authenticated just checks to see if the token is alive ** //
+    //returns true >> authenticated
+    //returns false >> not authenticated
     auth.isAuthenticated = function () {
         return (typeof $window.sessionStorage.token !== 'undefined');
     };

@@ -4,8 +4,13 @@
     src: url('../fonts/HelveticaNeueLTCom-Md.ttf') format('truetype');
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font-family: main;
+    height: 100%;
 }
 #scrollArea {
     overflow: auto;
@@ -227,4 +232,37 @@ body {
 
 .toastr-logout {
     background-color: #2980b9 !important;
+}
+
+/* Login Form */
+.loginWrapper {
+    background: url(../img/boomlieLogin2.png);
+    background-size: cover;
+    height:100%;
+    width:100%;
+    position: absolute;
+    top:0;
+    bottom: 0;
+}
+
+#loginForm > div > label {
+    color:white;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #ecf0f1;
+}
+
+#loginForm > div > input {
+    background: none;
+    border-radius: 0;
+    border-top:transparent;
+    border-right:transparent;
+    box-shadow:none;
+    -webkit-box-shadow:none;
+    color:white;
 }

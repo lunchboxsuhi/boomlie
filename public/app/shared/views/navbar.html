@@ -1,72 +1,88 @@
 ﻿<nav class="navbar-inverse navbar navbar-static-top" ng-controller="NavbarCtrl">
     <!-- TODO: App Player -->
 
-    <ul class="navbar-nav nav navbar-left playbar">
-        <li><a href=""><span class="glyphicon glyphicon-backward"></span></a></li>
-        <li><a href=""><span class="glyphicon glyphicon-play"></span></a></li>
-        <li><a href=""><span class="glyphicon glyphicon-forward"></span></a></li>
-    </ul>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" ng-click="isCollapsed = !isCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand sr-only" href="#">boomlie</a>
+    </div>
+    <div class="collapse navbar-collapse" collapse="isCollapsed">
+        <ul class="navbar-nav nav navbar-left playbar">
+            <li>
+                <a href="">
+                    <span class="glyphicon glyphicon-backward"></span>
+                    <span class="glyphicon glyphicon-play"></span>
+                    <span class="glyphicon glyphicon-forward"></span>
+                </a>
+            </li>
+        </ul>
 
-    <!-- Search TODO: fix search icon to be inside search bar 
-    <form class="navbar-form navbar-left " role="search">
-        <div class="form-group searchbar">
-            <input type="text" class="form-control form-search-text" placeholder="Search for song or artist">
-            <button class="btn btn-primary form-search"><span class="glyphicon glyphicon-search"></span></button>
+        <!-- Search TODO: fix search icon to be inside search bar
+        <form class="navbar-form navbar-left " role="search">
+            <div class="form-group searchbar">
+                <input type="text" class="form-control form-search-text" placeholder="Search for song or artist">
+                <button class="btn btn-primary form-search"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        </form>
+            -->
+
+        <!-- Navigation-->
+        <div class="container-fluid">
+            <ul class="navbar-nav nav navbar-right">
+                <li class="dropdown" dropdown>
+                    <a class="dropdown-toggle" dropdown-toggle>...</a>
+                    <ul class="dropdown-menu">
+                        <li><a>About us</a></li>
+                        <li><a>Contact us </a></li>
+                        <li><a>Terms and Conditions</a></li>
+                        <li><a>Copyright</a></li>
+                        <li><a>FAQ</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" dropdown>
+                    <a class="dropdown-toggle" dropdown-toggle ng-show="user.loggedIn">Account</a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="profile">Profile</a></li>
+                        <li><a ui-sref="messages">Mailbox <span class="badge">4</span></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Edit Profile <span class="glyphicon glyphicon-cog"></span></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" dropdown ng-show="user.loggedIn">
+                    <a class="dropdown-toggle" dropdown-toggle ui-sref="#">Upload</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Upload Song</a></li>
+                        <li><a href="#">Upload Video</a></li>
+                    </ul>
+                </li>
+                <!--<li class="dropdown" dropdown ng-show="!user.loggedIn">
+                    <a class="dropdown-toggle" dropdown-toggle>Login</a>
+                    <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                        <li>
+                            <div ng-include="'app/components/login/login.html'"></div>
+                        </li>
+                        <!--<li class="divider"></li>
+                        <li>
+                            <input type="button" class="btn btn-warning-boomlie btn-block" value="Login With Google">
+                            <input type="button" class="btn  btn-primary-boomlie btn-block" value="Login with Facebook">
+                        </li>
+                    </ul>
+                </li> -->
+                <li ng-show="user.loggedIn">
+                    <a href="#" ng-click="logout()">Logout</a>
+                </li>
+            </ul>
         </div>
-    </form>
-        -->
-
-    <!-- Navigation-->
-    <div class="container-fluid">
-        <ul class="navbar-nav nav navbar-right">
-            <li class="dropdown" dropdown>
-                <a class="dropdown-toggle" dropdown-toggle>...</a>
-                <ul class="dropdown-menu">
-                    <li><a >About us</a></li>
-                    <li><a >Contact us </a></li>
-                    <li><a >Terms and Conditions</a></li>
-                    <li><a >Copyright</a></li>
-                    <li><a >FAQ</a></li>
-
-                </ul>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown" dropdown>
-                <a class="dropdown-toggle" dropdown-toggle ng-show="user.loggedIn">Account</a>
-                <ul class="dropdown-menu">
-                    <li><a ui-sref="profile">Profile</a></li>
-                    <li><a ui-sref="messages">Mailbox <span class="badge">4</span></a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Edit Profile <span class="glyphicon glyphicon-cog"></span></a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
-                </ul>
-            </li>
-            <li class="dropdown" dropdown ng-show="user.loggedIn">
-                <a class="dropdown-toggle" dropdown-toggle ui-sref="#">Upload</a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Upload Song</a></li>
-                    <li><a href="#">Upload Video</a></li>
-                </ul>
-            </li>
-            <li class="dropdown" dropdown ng-show="!user.loggedIn">
-                <a class="dropdown-toggle" dropdown-toggle>Login</a>
-                <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
-                    <li>
-                        <div ng-include="'app/components/login/login.html'"></div>
-                    </li>
-                    <!--<li class="divider"></li>
-                    <li>
-                        <input type="button" class="btn btn-warning-boomlie btn-block" value="Login With Google">
-                        <input type="button" class="btn  btn-primary-boomlie btn-block" value="Login with Facebook">
-                    </li>-->
-                </ul>
-            </li>
-            <li ng-show="user.loggedIn">
-                <a href="#" ng-click="logout()">Logout</a>
-            </li>
-        </ul>
     </div>
 
 

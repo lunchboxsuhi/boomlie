@@ -13,12 +13,13 @@
     <link rel="stylesheet" href="../ext_resources/angular-toastr/dist/angular-toastr.min.css">
 
     <!-- custom css -->
-    <link rel="stylesheet" href="../resources/css/styles.css" >
+    <link rel="stylesheet" href="../resources/css/styles.css">
     <link rel="stylesheet" href="../resources/css/sidebar.css">
 </head>
 <body ng-controller="MainCtrl" ng-cloak>
-    <div id="fakeloader"></div>
+<div id="fakeloader"></div>
 
+<div ng-if="account.loggedIn">
     <div id="bg-img"></div>
     <div id="wrapper">
         <!-- sidebar rendered-->
@@ -36,55 +37,59 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- scripts to be loaded once DOM is finished -->
-    <script type="text/javascript" src="../ext_resources/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="../ext_resources/fakeLoader/fakeLoader.min.js"></script>
-    <script>
-        $('#fakeloader').fakeLoader({
-            timeToHide: 1500,
-            bgColor: 'black',
-            spinner: 'spinner6'
-        });
-        $(document).ready(function() {
-            $('#bg-img').addClass('background-image-top');
-        })
-    </script>
-    <script type="text/javascript" src="ext_resources/angular/angular.min.js"></script>
-    <script type="text/javascript" src="ext_resources/underscore/underscore-min.js"></script>
+<div ng-if="!account.loggedIn">
+    <div class="loginWrapper">
+            <div ui-view></div>
+    </div>
+</div>
 
-    <!-- angular add-ons -->
-    <script type="text/javascript" src="ext_resources/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="ext_resources/angular-bootstrap/ui-bootstrap.js"></script>
-    <script type="text/javascript" src="ext_resources/angular-wizard/dist/angular-wizard.js"></script>
-    <script type="text/javascript" src="ext_resources/ngActivityIndicator/ngActivityIndicator.js"></script>
-    <script type="text/javascript" src="ext_resources/angular-animate/angular-animate.js"></script>
-    <script type="text/javascript" src="ext_resources/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<!-- scripts to be loaded once DOM is finished -->
+<script type="text/javascript" src="../ext_resources/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="../ext_resources/fakeLoader/fakeLoader.min.js"></script>
+<script>
+    $('#fakeloader').fakeLoader({
+        timeToHide: 1500,
+        bgColor: 'black',
+        spinner: 'spinner6'
+    });
+    $(document).ready(function () {
+        $('#bg-img').addClass('background-image-top');
+    })
+</script>
+<script type="text/javascript" src="ext_resources/angular/angular.min.js"></script>
+<script type="text/javascript" src="ext_resources/underscore/underscore-min.js"></script>
 
-    <!-- inject bootstrap components into cache -->
-    <script type="text/javascript" src="ext_resources/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!-- angular add-ons -->
+<script type="text/javascript" src="ext_resources/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="ext_resources/angular-bootstrap/ui-bootstrap.js"></script>
+<script type="text/javascript" src="ext_resources/angular-wizard/dist/angular-wizard.js"></script>
+<script type="text/javascript" src="ext_resources/ngActivityIndicator/ngActivityIndicator.js"></script>
+<script type="text/javascript" src="ext_resources/angular-animate/angular-animate.js"></script>
+<script type="text/javascript" src="ext_resources/angular-toastr/dist/angular-toastr.tpls.js"></script>
 
-    <!-- angular app files -->
-    <script type="text/javascript" src="app/app.js"></script>
-    <script type="text/javascript" src="app/app.config.js"></script>
+<!-- inject bootstrap components into cache -->
+<script type="text/javascript" src="ext_resources/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
-    <!-- controllers -->
-    <script type="text/javascript" src="app/shared/controllers/MainCtrl.js"></script>
-    <script type="text/javascript" src="app/shared/controllers/NavbarCtrl.js"></script>
-    <script type="text/javascript" src="app/components/register/RegisterCtrl.js"></script>
-    <script type="text/javascript" src="app/components/login/LoginCtrl.js"></script>
-    <script type="text/javascript" src="app/shared/controllers/DatePickerCtrl.js"></script>
-    <script type="text/javascript" src="app/components/profile/ProfileCtrl.js"></script>
-    <script type="text/javascript" src="app/components/mailbox/MailboxCtrl.js"></script>
+<!-- angular app files -->
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/app.config.js"></script>
 
-    <!-- Factories -->
-    <script type="text/javascript" src="app/shared/services/authentication.js"></script>//
+<!-- controllers -->
+<script type="text/javascript" src="app/shared/controllers/MainCtrl.js"></script>
+<script type="text/javascript" src="app/shared/controllers/NavbarCtrl.js"></script>
+<script type="text/javascript" src="app/components/register/RegisterCtrl.js"></script>
+<script type="text/javascript" src="app/components/login/LoginCtrl.js"></script>
+<script type="text/javascript" src="app/shared/controllers/DatePickerCtrl.js"></script>
+<script type="text/javascript" src="app/components/profile/ProfileCtrl.js"></script>
+<script type="text/javascript" src="app/components/mailbox/MailboxCtrl.js"></script>
 
-    <!-- directives -->
-    <script type="text/javascript" src="app/shared/directives/scrollable.js"></script>
+<!-- Factories -->
+<script type="text/javascript" src="app/shared/services/authentication.js"></script>
 
-
-
+<!-- directives -->
+<script type="text/javascript" src="app/shared/directives/scrollable.js"></script>
 
 
 </body>
