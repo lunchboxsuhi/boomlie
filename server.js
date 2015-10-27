@@ -10,10 +10,11 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Faker = require('Faker');
+var fs = require('fs');
 
-
-
-
+//initialize azure storage
+var azure = require('azure');
+var blobService = azure.createBlobService('boomlieimages', 'N+vTMgiekSk8aX0zUXMN21l0fo1pbCepE5DtE7Kz8pNPBmvZDeKL+rIbtCeiBlX/iWD56WHKH3vKpKEfA5KJIA==');
 
 // CUSTOM
 var configDB = require('./config/database.js');
@@ -45,7 +46,11 @@ router.get('/populateDatabase', function (req, res) {
             firstName: Faker.Name.firstName(),
             lastName: Faker.Name.lastName(),
             email: Faker.Internet.email(),
-            imagePath: Faker.Image.avatar(),
+            profilePic: Faker.Image.avatar(),
+            description: Faker.Lorem.sentences(),
+            genre: Faker.Lorem.words(),
+            following: Math.round((Math.random()*1000) + 20),
+            followers: Math.round((Math.random()*1000) + 20),
             accountType: 'Fan',
             password: "password",
             DOB:  new Date(Faker.Date.past()),
@@ -61,6 +66,28 @@ router.get('/populateDatabase', function (req, res) {
         });
     }
     res.json({message: "100 users added to database" })
+});
+
+//test azure
+router.get('/uploadTempFile', function(req,res) {
+
+    blobService.createContainerIfNotExists('imagecontainer', {publicAccessLevel: 'blob'}, function(error, result, response) {
+        if (!error) {
+            blobService.createBlockBlobFromLocalFile('imagecontainer', 'snake', 'tempUpload/snake.jpg', function(error, result, response) {
+                if (!error) console.log('uploaded the file');
+            });
+        }
+    });
+});
+
+
+router.get('/showImage', function(req, res) {
+
+    blobService.getBlobToStream('imagecontainer', 'snake', fs.createWriteStream('output.jpg'), function(error, result, response) {
+        if (!error) {
+            console.log('file retrieved');
+        }
+    });
 });
 
 //show list of users

@@ -1,4 +1,6 @@
-angular.module('app').controller('LoginCtrl', ['$scope', '$http', '$window', 'authentication', function ($scope, $http, $window, authentication ) {
+angular.module('app').controller('LoginCtrl',
+    ['$scope', '$http', '$window', 'authentication', 'toastr',
+        function ($scope, $http, $window, authentication, toastr ) {
 
 
     console.log(authentication.isAuthenticated());
@@ -24,6 +26,12 @@ angular.module('app').controller('LoginCtrl', ['$scope', '$http', '$window', 'au
                     $scope.login.$setPristine();
                     $scope.login.$setUntouched();
                     $scope.loginUser = {};
+
+                    //toast logged in
+                    toastr.success('Logged in successfully', 'welcome ' + user.email);
+                }
+                else {
+                    toastr.error('Bad Credentials', 'Check E-mail and Password', {positionClass: 'toast-bottom-center'});
                 }
 
             })

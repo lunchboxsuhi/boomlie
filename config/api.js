@@ -104,7 +104,11 @@ module.exports = function(router, app, jwt) {
                 var profile = {
                     firstName: u.firstName,
                     lastName: u.lastName,
-                    imagePath: u.imagePath,
+                    description: u.description,
+                    genre: u.genre,
+                    following: u.following,
+                    followers: u.followers,
+                    profilePic: u.profilePic,
                     location: {
                         country: u.location.country,
                         city: u.location.city

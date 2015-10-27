@@ -15,7 +15,11 @@ angular.module('app').controller('ProfileCtrl', ['$scope', '$http', '$window', f
                 $scope.profile = {
                     firstName: u.firstName,
                     lastName: u.lastName,
-                    imagePath: u.imagePath,
+                    description: u.description,
+                    genre: u.genre,
+                    followers: u.followers,
+                    following: u.following,
+                    profilePic: u.profilePic,
                     location: {
                         country: u.location.country,
                         city: u.location.city

@@ -1,0 +1,12 @@
+<div ng-controller="MailboxCtrl">
+
+    <h1><span class="glyphicon glyphicon-envelope"></span></h1>
+
+
+    <tabset>
+        <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+            {{tab.content}}
+        </tab>
+    </tabset>
+
+</div>

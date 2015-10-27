@@ -36,9 +36,9 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
             controller: 'ProfileCtrl'
         })
         .state('messages', {
-            url: '/messgaes',
+            url: '/mailbox',
             templateUrl: componentPath + '/mailbox/mailbox.html',
-            controller: 'MessagesCtrl'
+            controller: 'MailboxCtrl'
         });
 
 

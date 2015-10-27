@@ -19,12 +19,11 @@
     <!-- Navigation-->
     <div class="container-fluid">
         <ul class="navbar-nav nav navbar-right">
-            <li><a ui-sref="#">Upload</a></li>
             <li><a ui-sref="#">...</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown" dropdown>
-                <a class="dropdown-toggle" dropdown-toggle>Account</a>
+                <a class="dropdown-toggle" dropdown-toggle ng-show="user.loggedIn">Account</a>
                 <ul class="dropdown-menu">
                     <li><a ui-sref="profile">Profile</a></li>
                     <li><a ui-sref="messages">Mailbox <span class="badge">4</span></a></li>
@@ -32,6 +31,13 @@
                     <li><a href="#">Edit Profile <span class="glyphicon glyphicon-cog"></span></a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">One more separated link</a></li>
+                </ul>
+            </li>
+            <li class="dropdown" dropdown ng-show="user.loggedIn">
+                <a class="dropdown-toggle" dropdown-toggle ui-sref="#">Upload</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Upload Song</a></li>
+                    <li><a href="#">Upload Video</a></li>
                 </ul>
             </li>
             <li class="dropdown" dropdown ng-show="!user.loggedIn">
