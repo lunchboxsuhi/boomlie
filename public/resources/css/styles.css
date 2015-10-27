@@ -266,3 +266,8 @@ input:-webkit-autofill:active {
     -webkit-box-shadow:none;
     color:white;
 }
+
+::-webkit-input-placeholder {
+    color: #ecf0f1 !important;
+}
+

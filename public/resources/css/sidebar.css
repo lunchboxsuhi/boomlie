@@ -177,5 +177,23 @@
 .boomlieTitle-font {
     font-family: 'boomlie-title';
     color: white;
-    font-size: 15em;
+    font-size: 13em;
+    margin-bottom:50px;
+}
+
+
+.loginHeader {
+    color:white;
+    font-size:32px;
+    font-family: 'boomlie-title';
+}
+
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .boomlieTitle-font {
+        font-family: 'boomlie-title';
+        color: white;
+        font-size: 5em;
+    }
 }

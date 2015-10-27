@@ -11,7 +11,7 @@ angular.module('app', ['ui.router', 'ui.bootstrap', 'mgo-angular-wizard', 'ngAct
                 $rootScope.savedLocation = $location.url();
 
                 $location.path('/login');
-                toastr.error('Unauthorized!', 'please log in');
+                //toastr.error('Unauthorized!', 'please log in');
             } else if (userAuthenticated && next.isRestricted) {
                 $location.path('/');
                 toastr.error('Cannot perform this action while logged in');
