@@ -1,194 +1,204 @@
-<div class="row">
-    <h2>Sign Up <small>It's easy, select a type of account</small></h2>
-    <br/>
+<div class="container">
+    <div class="boomlieTitle-font">
+    <h2>Sign Up
+        <small style="color:white;">- It's easy, select a type of account</small>
+    </h2>
+    </div>
 
-</div>
-<!-- TODO: add fan/artist/group icons -->
+    <!-- TODO: add fan/artist/group icons -->
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-3">
-            <button class="btn btn-warning-boomlie btn-register" ng-click="viewNum=0">
-                <span class="glyphicon glyphicon-user glyphicon-thumbs-up"></span>
-                Details
-            </button>
-            <hr/>
-            <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
-                <li class="list-group-item">Comment</li>
-                <li class="list-group-item">Donate To Artist or Group</li>
-                <li class="list-group-item">Buy Artist or Group content</li>
-                <li class="list-group-item">MailBox</li>
-                <li class="list-group-item">Create & Save Playlists</li>
-                <li class="list-group-item">Notifcation System</li>
-                <li class="list-group-item">Upload Music</li>
-                <li class="list-group-item">Upload Video</li>
-                <li class="list-group-item">Multiple Account Login</li>
-            </ul>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=1"
-                    ng-class="{'register-active' : viewNum == 1}">
-                <span class="fa fa-heart glyphicon-register"></span>
-                Fan
-            </button>
-            <hr>
-            <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
-                <li><span class="glyphicon glyphicon-ok glyph-center "></span></li>
-                <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
-                <li><span class="glyphicon glyphicon-remove glyph-center"></span></li>
-                <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
-            </ul>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=2" disabled style="background-color:darkred;"
-                    ng-class="{'register-active' : viewNum == 2}">
-                <span class="glyphicon glyphicon-user glyphicon-register"></span>
-                Artist
-                <small class="text-small">Coming soon</small>
-            </button>
-            <hr>
-            <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
-                <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
-                <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
-                <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
-                <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
-            </ul>
-        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <button class="btn btn-warning-boomlie btn-register" ng-click="viewNum=0">
+                    <span class="glyphicon glyphicon-user glyphicon-thumbs-up"></span>
+                    Details
+                </button>
+                <hr/>
+                <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
+                    <li class="list-group-item">Comment</li>
+                    <li class="list-group-item">Donate To Artist or Group</li>
+                    <li class="list-group-item">Buy Artist or Group content</li>
+                    <li class="list-group-item">MailBox</li>
+                    <li class="list-group-item">Create & Save Playlists</li>
+                    <li class="list-group-item">Notifcation System</li>
+                    <li class="list-group-item">Upload Music</li>
+                    <li class="list-group-item">Upload Video</li>
+                    <li class="list-group-item">Multiple Account Login</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=1"
+                        ng-class="{'register-active' : viewNum == 1}">
+                    <span class="fa fa-heart glyphicon-register"></span>
+                    Fan
+                </button>
+                <hr>
+                <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
+                    <li><span class="glyphicon glyphicon-ok glyph-center "></span></li>
+                    <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
+                    <li><span class="glyphicon glyphicon-remove glyph-center"></span></li>
+                    <li><span class="glyphicon glyphicon-ok glyph-center"></span></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=2" disabled
+                        style="background-color:darkred;"
+                        ng-class="{'register-active' : viewNum == 2}">
+                    <span class="glyphicon glyphicon-user glyphicon-register"></span>
+                    Artist
+                    <small class="text-small">Coming soon</small>
+                </button>
+                <hr>
+                <ul class="list-unstyled sign-up-list" ng-show="viewNum == 0">
+                    <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
+                    <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
+                    <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
+                    <li><span class="glyphicon glyphicon-check glyph-center"></span></li>
+                </ul>
+            </div>
 
-        <div class="col-md-3">
-            <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=3"
-                    ng-class="{'register-active' : viewNum == 3}" style="background-color: darkred;" disabled>
-                <span class="fa fa-users glyphicon-register"></span>
-                Group
-                <small class="text-small">Coming soon</small>
-            </button>
-            <hr>
-            <div ng-show="viewNum == 0">
-                <p>Group is a cool new concept to allow multiple artists to create and socialize together to create
-                    publish listen to music! grab a friend or your current band and get involved in the community
-                </p>
+            <div class="col-md-3">
+                <button class="btn btn-default-boomlie btn-register" ng-click="viewNum=3"
+                        ng-class="{'register-active' : viewNum == 3}" style="background-color: darkred;" disabled>
+                    <span class="fa fa-users glyphicon-register"></span>
+                    Group
+                    <small class="text-small">Coming soon</small>
+                </button>
+                <hr>
+                <div ng-show="viewNum == 0">
+                    <p>Group is a cool new concept to allow multiple artists to create and socialize together to create
+                        publish listen to music! grab a friend or your current band and get involved in the community
+                    </p>
 
-                <p>allows multiple accounts to allow account modification, is a controlled sytem 1 person is the <i>Master</i>
-                    of the boomlie account
-                    and they can set previliages to other members - example, let's say the groups manager and or
-                    co-ordiantor, they can set up the group and
-                    give the artists a(n) account to use through it, allowing better management</p>
+                    <p>allows multiple accounts to allow account modification, is a controlled sytem 1 person is the <i>Master</i>
+                        of the boomlie account
+                        and they can set previliages to other members - example, let's say the groups manager and or
+                        co-ordiantor, they can set up the group and
+                        give the artists a(n) account to use through it, allowing better management</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<!-- Register Form and Wizard form Fan -->
-<div class="row register-form" ng-show="viewNum == 1">
-    <form ng-submit="registerUser()" name="fan" class="col-md-8 col-md-offset-2 registerForm">
-        <wizard>
-            <wz-step title="Account Credentials">
-                <div class="form-group">
-                    <label for="fanEmail" class="control-label">Email</label>
-                    <input type="email" class="form-control" ng-model="fan.email" id="fanEmail">
-                </div>
+    <!-- Register Form and Wizard form Fan -->
+    <div class="row register-form" ng-show="viewNum == 1">
+        <form ng-submit="registerUser()" name="fan" class="col-md-8 col-md-offset-2 registerForm">
+            <wizard>
+                <wz-step title="Account Credentials">
+                    <div class="form-group">
+                        <label for="fanEmail" class="control-label">Email</label>
+                        <input type="email" class="form-control" ng-model="fan.email" id="fanEmail">
+                    </div>
 
-                <div class="form-group">
-                    <label for="fanEmailRepeat" class="control-label">re-type</label>
-                    <input type="email" class="form-control" id="fanEmailRepeat">
-                </div>
+                    <div class="form-group">
+                        <label for="fanEmailRepeat" class="control-label">re-type</label>
+                        <input type="email" class="form-control" id="fanEmailRepeat">
+                    </div>
 
-                <div class="form-group">
-                    <label for="fanPassword" class="control-label">Password</label>
-                    <input type="password" class="form-control" ng-model="fan.password" id="fanPassword"/>
-                </div>
+                    <div class="form-group">
+                        <label for="fanPassword" class="control-label">Password</label>
+                        <input type="password" class="form-control" ng-model="fan.password" id="fanPassword"/>
+                    </div>
 
-                <div class="form-group">
-                    <label for="fanPasswordRepeat" class="control-label">Re-Enter Password</label>
-                    <input type="password" class="form-control" id="fanPasswordRepeat"/>
-                </div>
+                    <div class="form-group">
+                        <label for="fanPasswordRepeat" class="control-label">Re-Enter Password</label>
+                        <input type="password" class="form-control" id="fanPasswordRepeat"/>
+                    </div>
 
-                <input type="submit" wz-next ng-click="accountCredentials()" class="btn btn-primary-boomlie btn-block"
-                       value="Next"/>
-            </wz-step>
+                    <input type="submit" wz-next ng-click="accountCredentials()"
+                           class="btn btn-primary-boomlie btn-block"
+                           value="Next"/>
+                </wz-step>
 
-            <wz-step title="Account Information">
-                <div class="form-group">
-                    <label for="fanFirstName" class="control-label">First Name</label>
-                    <input type="text" class="form-control" ng-model="fan.firstName" id="fanFirstName"/>
-                </div>
+                <wz-step title="Account Information">
+                    <div class="form-group">
+                        <label for="fanFirstName" class="control-label">First Name</label>
+                        <input type="text" class="form-control" ng-model="fan.firstName" id="fanFirstName"/>
+                    </div>
 
-                <div class="form-group">
-                    <label for="fanLastName" class="control-label">Last Name</label>
-                    <input type="text" class="form-control" ng-model="fan.lastName" id="fanLastName"/>
-                </div>
+                    <div class="form-group">
+                        <label for="fanLastName" class="control-label">Last Name</label>
+                        <input type="text" class="form-control" ng-model="fan.lastName" id="fanLastName"/>
+                    </div>
 
-                <div ng-controller="DatePickerCtrl">
-                    <label for="fanDateOfBirth" class="control-label">Date of Birth</label>
+                    <div ng-controller="DatePickerCtrl">
+                        <label for="fanDateOfBirth" class="control-label">Date of Birth</label>
 
-                    <p class="input-group">
-                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="fan.dt"
-                               is-open="status.opened" min-date="minDate" max-date="maxDate" placeholder="YYYY/MM/DD"
-                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"
-                               close-text="Close" id="fanDateOfBirth"/>
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="fan.dt"
+                                   is-open="status.opened" min-date="minDate" max-date="maxDate"
+                                   placeholder="YYYY/MM/DD"
+                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                   ng-required="true"
+                                   close-text="Close" id="fanDateOfBirth"/>
                     <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="open($event)">
                                 <i class="glyphicon glyphicon-calendar"></i>
                             </button>
                     </span>
-                    </p>
-                </div>
-
-                <div class="form-group">
-                    <label for="fanCountry" class="control-label">Country</label>
-                    <input type="text" class="form-control" ng-model="fan.location.country" id="fanCountry"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="fanCity" class="control-label">City</label>
-                    <input type="text" class="form-control" ng-model="fan.location.city" id="fanCity"/>
-                </div>
-
-                <input type="submit" class="btn btn-primary-boomlie btn-block" ng-click="accountInfo()" wz-next
-                       value="Next"/>
-            </wz-step>
-
-            <wz-step title="Review & Submit">
-                <div class="register-review">
-                    <h3>Review your information</h3>
-                    <div class="row">
-                        <div class="col-md-4"><b>Email:</b></div>
-                        <div class="col-md-6">{{ fan.email }}</div>
+                        </p>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4"><b>First Name:</b></div>
-                        <div class="col-md-6">{{ fan.firstName }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><b>Last Name:</b></div>
-                        <div class="col-md-6">{{ fan.lastName }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><b>Date of Birth:</b></div>
-                        <div class="col-md-6">{{ fan.dt | date:'fullDate' }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><b>Country:</b></div>
-                        <div class="col-md-6">{{ fan.location.country }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><b>City:</b></div>
-                        <div class="col-md-6">{{ fan.location.city }}</div>
-                    </div>
-                </div>
-                <br/>
 
-                <p style="color: lightblue;">By clicking submit, you're agreeing to our privacy statements, terms of service and agreement |ADD WEBSITE LOCATION|</p>
+                    <div class="form-group">
+                        <label for="fanCountry" class="control-label">Country</label>
+                        <input type="text" class="form-control" ng-model="fan.location.country" id="fanCountry"/>
+                    </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>
-                </div>
-            </wz-step>
+                    <div class="form-group">
+                        <label for="fanCity" class="control-label">City</label>
+                        <input type="text" class="form-control" ng-model="fan.location.city" id="fanCity"/>
+                    </div>
 
-            <!-- upload photo -->
-        </wizard>
-    </form>
+                    <input type="submit" class="btn btn-primary-boomlie btn-block" ng-click="accountInfo()" wz-next
+                           value="Next"/>
+                </wz-step>
+
+                <wz-step title="Review & Submit">
+                    <div class="register-review">
+                        <h3>Review your information</h3>
+
+                        <div class="row">
+                            <div class="col-md-4"><b>Email:</b></div>
+                            <div class="col-md-6">{{ fan.email }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"><b>First Name:</b></div>
+                            <div class="col-md-6">{{ fan.firstName }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"><b>Last Name:</b></div>
+                            <div class="col-md-6">{{ fan.lastName }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"><b>Date of Birth:</b></div>
+                            <div class="col-md-6">{{ fan.dt | date:'fullDate' }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"><b>Country:</b></div>
+                            <div class="col-md-6">{{ fan.location.country }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"><b>City:</b></div>
+                            <div class="col-md-6">{{ fan.location.city }}</div>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <p style="color: lightblue;">By clicking submit, you're agreeing to our privacy statements, terms of
+                        service and agreement |ADD WEBSITE LOCATION|</p>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary-boomlie btn-block">Submit</button>
+                    </div>
+                </wz-step>
+
+                <!-- upload photo -->
+            </wizard>
+        </form>
+    </div>
+
 </div>
 
 <!--

@@ -14,8 +14,8 @@ var userSchema = mongoose.Schema({
     updated_at: Date,
     description: String,
     genre: String,
-    followers: String,
-    following: String,
+    followers: Number,
+    following: Number,
     mailbox: [{
         social_id: String,
         purchase_id: String,
@@ -36,8 +36,8 @@ userSchema.methods.generateHash = function (password) {
 };
 
 // checking if password is valid
-userSchema.methods.validPassword = function (password) {
-    return bcrypt.compareSync(password, this.local.password);
+userSchema.methods.validPassword = function (password, dbPassword) {
+    return bcrypt.compareSync(password, dbPassword);
 };
 
 // create the model for users and expose it to our app

@@ -2,7 +2,7 @@
 
 // NPM
 var express = require('express');
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 7999;
 var mongoose = require('mongoose');
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
@@ -19,7 +19,7 @@ var blobService = azure.createBlobService('boomlieimages', 'N+vTMgiekSk8aX0zUXMN
 // CUSTOM
 var configDB = require('./config/database.js');
 
-// Initialize packages
+// Initialize Router
 var app = express();
 var router = express.Router();
 
@@ -30,7 +30,7 @@ mongoose.connect(configDB.url); // connect to our database
 app.set('superSecret', 'randomizationpassword');
 app.use(morgan('dev'));                                     // log every request to the console
 app.use(bodyParser.json());                                 // get information from html forms
-app.use(bodyParser.urlencoded({extended: true}));         // get url-encoding?
+app.use(bodyParser.urlencoded({extended: true}));           // get url-encoding?
 app.use(cors());                                            // allow cross origin information to be transferred
 
 //express third party routing
@@ -38,9 +38,17 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', [__dirname + '/public/app', __dirname + '/public/ext_resources', __dirname + '/public/ext_resources/ui-bootstrap']);
 app.engine('html', require('ejs').renderFile);
 
-//temporary practice router
+
+
+
+//Main Load our Angular js app
+router.get('/', function(req, res) {
+    res.render('index.html');
+});
+
 var User = require('./models/user');
 router.get('/populateDatabase', function (req, res) {
+
     for(var i=0; i < 100; i++) {
         var user = new User({
             firstName: Faker.Name.firstName(),
@@ -52,13 +60,14 @@ router.get('/populateDatabase', function (req, res) {
             following: Math.round((Math.random()*1000) + 20),
             followers: Math.round((Math.random()*1000) + 20),
             accountType: 'Fan',
-            password: "password",
             DOB:  new Date(Faker.Date.past()),
             location: {
                 country: Faker.Address.ukCountry(),
                 city: Faker.Address.city()
             }
         });
+
+        user.password = user.generateHash('password');
 
         user.save(function(err) {
             if(err) console.log(err);
@@ -68,19 +77,21 @@ router.get('/populateDatabase', function (req, res) {
     res.json({message: "100 users added to database" })
 });
 
+//make use of our auth middleware
+require('./config/auth')(router, app, jwt);
+
 //test azure
 router.get('/uploadTempFile', function(req,res) {
-
     blobService.createContainerIfNotExists('imagecontainer', {publicAccessLevel: 'blob'}, function(error, result, response) {
         if (!error) {
-            blobService.createBlockBlobFromLocalFile('imagecontainer', 'snake', 'tempUpload/snake.jpg', function(error, result, response) {
+            blobService.createBlockBlobFromLocalFile('imagecontainer', 'emptyAvatar', 'tempUpload/emptyProfilePicture.gif', function(error, result, response) {
                 if (!error) console.log('uploaded the file');
             });
-        }
+    }
     });
 });
 
-
+//test image from azure blob storage
 router.get('/showImage', function(req, res) {
 
     blobService.getBlobToStream('imagecontainer', 'snake', fs.createWriteStream('output.jpg'), function(error, result, response) {
@@ -99,9 +110,19 @@ router.get('/listOfUsers', function(req,res) {
     }).skip(50).limit(20).lean();
 });
 
-app.use(router);
-
+//load the routes here
 require('./config/api')(router, app, jwt);
+
+//load on the router middleware after it has been initialized and populated with routes
+
+
+//for pretty urls && allowing refreshing
+router.all('/*', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.sendFile('index.html', { root: __dirname + '/public/app' });
+});
+
+app.use(router);
 
 /*
  // routes ======================================================================

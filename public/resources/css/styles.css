@@ -6,6 +6,7 @@
 
 html {
     height: 100%;
+    min-height: 100%;
 }
 
 body {
@@ -267,7 +268,34 @@ input:-webkit-autofill:active {
     color:white;
 }
 
-::-webkit-input-placeholder {
+#loginForm > div >::-webkit-input-placeholder {
     color: #ecf0f1 !important;
 }
 
+/* Followers on Profile Page */
+.socialStats > span {
+    height: 35px;
+    line-height: 20px;
+}
+.followFormat {
+    margin-right: 5px;
+}
+
+.profileOptions > button {
+    margin-right:5px;
+}
+
+
+.profileNav > li > a {
+    text-decoration: none;
+    color:black;
+}
+
+.activeProfileNav > a {
+    background-color:#3366cc !important;
+    color:white !important;
+}
+
+.bottomProfile {
+    margin-top: 15px;
+}

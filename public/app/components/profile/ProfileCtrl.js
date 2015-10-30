@@ -1,4 +1,7 @@
-angular.module('app').controller('ProfileCtrl', ['$scope', '$http', '$window', function($scope, $http, $window) {
+angular.module('app').controller('ProfileCtrl', ['$scope', '$http', '$window', '$location',
+    function($scope, $http, $window, $location) {
+
+    $scope.ownProfile = true;
 
     if (typeof $window.sessionStorage.token !== 'undefined') {
 
@@ -25,9 +28,11 @@ angular.module('app').controller('ProfileCtrl', ['$scope', '$http', '$window', f
                         city: u.location.city
                     }
                 };
-            },
-        function(err) {
-            console.log('server error');
-        })
+
+                $scope.profile.profileDefaultPicture =  typeof $scope.profile.profilePic === 'undefined';
+                $location.path('/profile/newsfeed');
+            }, function(err) {
+                console.log('server error');
+            })
     }
 }]);

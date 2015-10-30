@@ -1,29 +1,15 @@
-module.exports = function(router, app, jwt) {
+module.exports = function (router, app, jwt) {
 
 
-    //Models required to be used
+    //Models required to be used in api
     var User = require('../models/user.js');
 
-    //Main SPA Load
-    router.get('/', function(req, res) {
-        res.render('index.html');
-    });
-
-    //***************************************************
-    //**************** Authenticated routes *************
-    //***************************************************
-
-    router.get('/api/users', function(req, res) {
-        //find users
-        User.find({}, 'firstName lastName', function(err, doc) {
-            console.log(doc);
-            res.json(doc);
-        }).skip(50).limit(20).lean();
-
-    });
+    //**************************************************
+    //************ UnAthenticated Routes ***************
+    //**************************************************
 
     //Signup
-    router.post('/signup', function(req,res) {
+    router.post('/signup', function (req, res) {
         //grab object to be used
         var user = req.body;
 
@@ -35,7 +21,10 @@ module.exports = function(router, app, jwt) {
                 email: user.email,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                password: user.password,
+                created_at: new Date(),
+                updated_at: new Date(),
+                followers: 0,
+                following: 0,
                 DOB: user.DOB,
                 location: {
                     country: user.location.country,
@@ -43,8 +32,11 @@ module.exports = function(router, app, jwt) {
                 }
             });
 
+            //add the property password with a hashed value
+            newUser.password = newUser.generateHash(user.password);
+
             //save the user to the database
-            newUser.save(function(err) {
+            newUser.save(function (err) {
                 if (err) throw err;
 
                 console.log("Successfully create user " + user.email);
@@ -53,53 +45,70 @@ module.exports = function(router, app, jwt) {
         }
     });
 
-    //Login
-    router.post('/authenticate', function(req,res) {
+
+    router.post('/authenticate', function (req, res) {
 
         User.findOne({
-           email: req.body.email
-       }, function(err, user) {
-           if (err) throw err;
+            email: req.body.email
+        }, function (err, user) {
+            if (err) throw err;
 
-           if (!user) {
-               res.json({ success: false, message: 'Authentication Failed. User Not Found'});
-           } else if (user) {
-               if(user.password != req.body.password) {
-                   res.json({ success: false, message: 'Authentication Failed. Wrong Password'});
-               } else {
+            if (!user) {
+                res.json({success: false, message: 'Authentication Failed. User Not Found'});
+            } else if (user) {
 
-                   var jwtModel = {
-                       user_id: user._id
-                   };
+                var dbUser = new User();
 
-                   var token = jwt.sign(jwtModel, app.get('superSecret'), {
-                       expireInMinutes: 1440 //expires in 24 hours
-                   });
+                if (!dbUser.validPassword(req.body.password, user.password)) {
+                    res.json({success: false, message: 'Authentication Failed. Wrong Password'});
+                } else {
 
-                   res.json({
-                       success: true,
-                       message: 'Enjoy the Token',
-                       token: token
-                   });
+                    var jwtModel = {
+                        user_id: user._id
+                    };
 
-                   console.log(jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-                        console.log("DECODED: " + JSON.stringify(decoded,3));
-                   }));
-               }
-           }
-       });
+                    var token = jwt.sign(jwtModel, app.get('superSecret'), {
+                        expireInMinutes: 1440 //expires in 24 hours
+                    });
+
+                    res.json({
+                        success: true,
+                        message: 'Enjoy the Token',
+                        token: token
+                    });
+
+                    console.log(jwt.verify(token, app.get('superSecret'), function (err, decoded) {
+                        console.log("DECODED: " + JSON.stringify(decoded, 3));
+                    }));
+                }
+            }
+        });
     });
 
-    //isAuthenticated to view this page
-    router.post('/api/profile', function(req, res) {
 
-        jwt.verify(req.body.token, app.get('superSecret'), function(err, d) {
+    //***************************************************
+    //**************** Authenticated routes *************
+    //***************************************************
+
+    //get a list of 20 users
+    router.get('/api/users', function (req, res) {
+        //find users
+        User.find({}, 'firstName lastName', function (err, doc) {
+            console.log(doc);
+            res.json(doc);
+        }).skip(50).limit(20).lean();
+    });
+
+
+    //the current users profile
+    router.post('/api/profile', function (req, res) {
+
+        jwt.verify(req.body.token, app.get('superSecret'), function (err, d) {
             if (err) throw err;
 
 
-
             //get user information from mongod
-            User.findOne({_id: d.user_id}, function(err, u) {
+            User.findOne({_id: d.user_id}, function (err, u) {
                 //profile model - we don't want all the fields
                 var profile = {
                     firstName: u.firstName,
@@ -120,26 +129,4 @@ module.exports = function(router, app, jwt) {
             });
         });
     });
-
-    //route middleware
-    router.use('/api', function(req, res, next) {
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-        if(token) {
-            jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-                if (err) {
-                    return res.json({success: false, message: 'Failed to authenticate'});
-                } else {
-                    next();
-                }
-            })
-        } else {
-            //if there no token gtfo
-            return res.status(403).send({
-                success: false,
-                message: 'No Token Provided'
-            });
-        }
-    });
-
 };

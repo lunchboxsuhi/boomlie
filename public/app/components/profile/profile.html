@@ -1,14 +1,63 @@
-<div class="col-md-2">
-    <img ng-src="{{profile.profilePic}}" style="width: 100%; height: 100%;"/>
+<div class="row">
+    <div class="col-md-2" id="profilePicture" ng-if="!profile.profileDefaultPicture">
+        <img ng-src="{{profile.profilePic}}" style="width: 100%; height: 100%;"/>
+    </div>
+    <div class="col-md-2" ng-if="profile.profileDefaultPicture">
+        <img src="https://boomlieimages.blob.core.windows.net/imagecontainer/emptyAvatar" alt="no profile image found"
+             style="width: 100%; height: 100%;"/>
+    </div>
+
+
+    <div class="col-md-10">
+        <h2 class="profileOptions">
+            <b>{{profile.firstName}} {{profile.lastName}}</b>
+            <button ng-if="ownProfile" class="btn pull-right btn-warning-boomlie"><span
+                    class="glyphicon glyphicon-cog"></span> Edit Profile
+            </button>
+            <button ng-if="!ownProfile" class="btn pull-right btn-default-boomlie"><span
+                    class="glyphicon glyphicon-eye-open"></span> Follow
+            </button>
+            <button ng-if="!ownProfile" class="btn pull-right btn-primary-boomlie"><span
+                    class="glyphicon glyphicon-envelope"></span> Message
+            </button>
+
+        </h2>
+
+        <h2 class="text-small">{{profile.genre}}</h2>
+
+        <h2>
+            <small>{{profile.description}}</small>
+        </h2>
+
+
+        <h4><b>{{profile.location.country}}, {{profile.location.city}}</b></h4>
+
+        <div class="socialStats">
+            <!-- followers -->
+            <span class="fa fa-users btn btn-primary-boomlie "></span><span
+                class="btn btn-default-boomlie followFormat">{{profile.followers}}</span>
+
+            <!--user status -->
+            <span class="fa fa-trophy btn btn-primary-boomlie "></span><span
+                class="btn btn-default-boomlie followFormat">Bronze</span>
+
+            <!--following -->
+            <span class="fa fa-bar-chart-o btn btn-primary-boomlie "></span><span class="btn btn-default-boomlie">{{profile.following}}</span>
+        </div>
+    </div>
 </div>
+<div class="row bottomProfile">
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked profileNav">
+            <li ui-sref-active="activeProfileNav"><a ui-sref="profile.newsfeed"><span class="glyphicon glyphicon-chevron-right"></span> News Feed</a></li>
+            <li ui-sref-active="activeProfileNav"><a ui-sref="profile.about"><span class="glyphicon glyphicon-chevron-right"></span> About</a></li>
+            <li ui-sref-active="activeProfileNav"><a ui-sref="profile.music"><span class="glyphicon glyphicon-chevron-right"></span> Music</a></li>
+            <li ui-sref-active="activeProfileNav"><a ui-sref="profile.playlist"><span class="glyphicon glyphicon-chevron-right"></span> Playlists</a></li>
+            <li ui-sref-active="activeProfileNav"><a ui-sref="profile.stats"><span class="glyphicon glyphicon-chevron-right"></span> Stats</a></li>
+        </ul>
+    </div>
 
-<div class="col-md-10">
-    <h2><b>{{profile.firstName}} {{profile.lastName}}</b></h2>
-    <h2 class="text-small">{{profile.genre}}</h2>
-    <h2><small>{{profile.description}}</small></h2>
-    <hr/>
-
-    <h4><b>{{profile.location.country}}, {{profile.location.city}}</b></h4>
-    <div><b>Follwers</b> {{profile.followers}}</div>
-    <div><b>Following</b> {{profile.following}}</div>
+    <div class="col-md-10">
+        <div ui-view></div>
+    </div>
 </div>

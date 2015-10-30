@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app').config(['$stateProvider', '$urlRouterProvider', 'toastrConfig', function ($stateProvider, $urlRouterProvider, toastrConfig) {
+angular.module('app').config(['$stateProvider', '$urlRouterProvider', 'toastrConfig', '$locationProvider',
+    function ($stateProvider, $urlRouterProvider, toastrConfig, $locationProvider) {
 
     //======================================
     //============ States =================
@@ -37,10 +38,37 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', 'toastrCon
             isLogin: false,
             isRestricted: true
         })
+
+        //PROFILE pages and sub views
         .state('profile', {
             url: '/profile',
             templateUrl: componentPath + '/profile/profile.html',
             controller: 'ProfileCtrl',
+            isLogin: true
+        })
+        .state('profile.newsfeed', {
+            url: '/newsfeed',
+            templateUrl: componentPath + '/profile/newsfeed.html',
+            isLogin: true
+        })
+        .state('profile.about', {
+            url: '/about',
+            templateUrl: componentPath + '/profile/about.html',
+            isLogin:true
+        })
+        .state('profile.music', {
+            url: '/music',
+            templateUrl: componentPath + '/profile/music.html',
+            isLogin: true
+        })
+        .state('profile.playlist', {
+            url: '/playlist',
+            templateUrl: componentPath + '/profile/playlist.html',
+            isLogin: true
+        })
+        .state('profile.stats', {
+            url: '/stats',
+            templateUrl: componentPath + '/profile/stats.html',
             isLogin: true
         })
         .state('messages', {
@@ -59,7 +87,7 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', 'toastrCon
 
     //send to home page if this is not work
     $urlRouterProvider.otherwise('/');
-
+    $locationProvider.html5Mode(true);
 
     //config tostr
     angular.extend(toastrConfig, {
