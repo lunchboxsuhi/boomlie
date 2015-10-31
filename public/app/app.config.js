@@ -77,6 +77,12 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', 'toastrCon
             controller: 'MailboxCtrl',
             isLogin: true
         })
+        .state('upload', {
+            url: '/upload',
+            templateUrl: componentPath + '/upload/upload.html',
+            controller: 'UploadCtrl',
+            isLogin: true
+        })
         .state('login', {
             url: '/login',
             templateUrl: componentPath + '/login/loginPage.html',

@@ -58,12 +58,8 @@
                         <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" dropdown ng-show="user.loggedIn">
-                    <a class="dropdown-toggle" dropdown-toggle ui-sref="#">Upload</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Upload Song</a></li>
-                        <li><a href="#">Upload Video</a></li>
-                    </ul>
+                <li ng-show="user.loggedIn">
+                    <a ui-sref="upload">Upload</a>
                 </li>
                 <!--<li class="dropdown" dropdown ng-show="!user.loggedIn">
                     <a class="dropdown-toggle" dropdown-toggle>Login</a>

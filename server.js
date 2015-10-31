@@ -12,9 +12,6 @@ var bodyParser = require('body-parser');
 var Faker = require('Faker');
 var fs = require('fs');
 
-//initialize azure storage
-var azure = require('azure');
-var blobService = azure.createBlobService('boomlieimages', 'N+vTMgiekSk8aX0zUXMN21l0fo1pbCepE5DtE7Kz8pNPBmvZDeKL+rIbtCeiBlX/iWD56WHKH3vKpKEfA5KJIA==');
 
 // CUSTOM
 var configDB = require('./config/database.js');
@@ -39,17 +36,15 @@ app.set('views', [__dirname + '/public/app', __dirname + '/public/ext_resources'
 app.engine('html', require('ejs').renderFile);
 
 
-
-
 //Main Load our Angular js app
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
     res.render('index.html');
 });
 
 var User = require('./models/user');
 router.get('/populateDatabase', function (req, res) {
 
-    for(var i=0; i < 100; i++) {
+    for (var i = 0; i < 100; i++) {
         var user = new User({
             firstName: Faker.Name.firstName(),
             lastName: Faker.Name.lastName(),
@@ -57,10 +52,10 @@ router.get('/populateDatabase', function (req, res) {
             profilePic: Faker.Image.avatar(),
             description: Faker.Lorem.sentences(),
             genre: Faker.Lorem.words(),
-            following: Math.round((Math.random()*1000) + 20),
-            followers: Math.round((Math.random()*1000) + 20),
+            following: Math.round((Math.random() * 1000) + 20),
+            followers: Math.round((Math.random() * 1000) + 20),
             accountType: 'Fan',
-            DOB:  new Date(Faker.Date.past()),
+            DOB: new Date(Faker.Date.past()),
             location: {
                 country: Faker.Address.ukCountry(),
                 city: Faker.Address.city()
@@ -69,42 +64,21 @@ router.get('/populateDatabase', function (req, res) {
 
         user.password = user.generateHash('password');
 
-        user.save(function(err) {
-            if(err) console.log(err);
+        user.save(function (err) {
+            if (err) console.log(err);
 
         });
     }
-    res.json({message: "100 users added to database" })
+    res.json({message: "100 users added to database"})
 });
 
 //make use of our auth middleware
 require('./config/auth')(router, app, jwt);
 
-//test azure
-router.get('/uploadTempFile', function(req,res) {
-    blobService.createContainerIfNotExists('imagecontainer', {publicAccessLevel: 'blob'}, function(error, result, response) {
-        if (!error) {
-            blobService.createBlockBlobFromLocalFile('imagecontainer', 'emptyAvatar', 'tempUpload/emptyProfilePicture.gif', function(error, result, response) {
-                if (!error) console.log('uploaded the file');
-            });
-    }
-    });
-});
-
-//test image from azure blob storage
-router.get('/showImage', function(req, res) {
-
-    blobService.getBlobToStream('imagecontainer', 'snake', fs.createWriteStream('output.jpg'), function(error, result, response) {
-        if (!error) {
-            console.log('file retrieved');
-        }
-    });
-});
-
 //show list of users
-router.get('/listOfUsers', function(req,res) {
+router.get('/listOfUsers', function (req, res) {
     //find users
-    User.find({}, 'firstName lastName', function(err, doc) {
+    User.find({}, 'firstName lastName', function (err, doc) {
         console.log(doc);
         res.json(doc);
     }).skip(50).limit(20).lean();
@@ -113,15 +87,21 @@ router.get('/listOfUsers', function(req,res) {
 //load the routes here
 require('./config/api')(router, app, jwt);
 
+
+//************************ Azure UPLOAD API **********************//
+//****************************************************************//
+//****************************************************************//
+
+
+
 //load on the router middleware after it has been initialized and populated with routes
-
-
 //for pretty urls && allowing refreshing
-router.all('/*', function(req, res, next) {
+router.all('/*', function (req, res, next) {
     // Just send the index.html for other files to support HTML5Mode
-    res.sendFile('index.html', { root: __dirname + '/public/app' });
+    res.sendFile('index.html', {root: __dirname + '/public/app'});
 });
 
+//Give app the router object to be used.
 app.use(router);
 
 /*

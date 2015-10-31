@@ -1,6 +1,12 @@
 module.exports = function (router, app, jwt) {
 
 
+    //utilities to be used for middleware on certain routes
+    var azureStorage = require('azure-storage');
+    var multipart = require('connect-multiparty');
+    var multipartMiddleware = multipart();
+    var fs = require('fs');
+
     //Models required to be used in api
     var User = require('../models/user.js');
 
@@ -89,6 +95,87 @@ module.exports = function (router, app, jwt) {
     //***************************************************
     //**************** Authenticated routes *************
     //***************************************************
+
+    //upload profile picture
+    router.post('/api2/uploadImage', multipartMiddleware, function (req, res, next) {
+
+        var path = 'https://boomlieimages.blob.core.windows.net/imagecontainer/';
+        var container = 'imagecontainer';
+
+        //create blob service obj
+        var blobService = azureStorage.createBlobService('boomlieimages', 'N+vTMgiekSk8aX0zUXMN21l0fo1pbCepE5DtE7Kz8pNPBmvZDeKL+rIbtCeiBlX/iWD56WHKH3vKpKEfA5KJIA==');
+
+        fs.stat(req.files.file.path, function (err, stat) {
+            if (err) throw err;
+
+            User.findOne({_id: req.decoded.user_id}, function (err, user) {
+                if (err) throw err;
+
+                var timestamp = new Date().getTime();
+                var currentUser = user.profilePic;
+
+                // if the user has not uploaded an image yet it will remain empty
+                if (user.profilePic != "") {
+
+                    //extract the blobID from the url
+                    var urlParse = currentUser.split('/');
+                    var blobId = urlParse[urlParse.length - 1];
+
+                    console.log('user profile1: ' + currentUser);
+
+                    blobService.doesBlobExist(container, blobId, function (err, res) {
+                        if (err) throw err;
+
+                        console.log('userProfile2: ' + currentUser);
+
+                        if (res == true) {
+                            blobService.startCopyBlob(currentUser, container, blobId, function (err, res) {
+                                if (err) throw err;
+
+                                if (res.copyStatus === "success") {
+                                    blobService.deleteBlob(container, blobId, function (err, res) {
+                                        if (err) throw err;
+
+                                        console.log("deleted old blob " + res);
+                                    });
+                                }
+                            });
+                        }
+
+
+                    });
+                } else {}
+
+                user.profilePic = path + user._id + timestamp; //update the user
+
+                var readstream = fs.createReadStream(req.files.file.path);
+
+                blobService.createBlockBlobFromStream(
+                    container,
+                    user._id.toString() + timestamp,
+                    readstream,
+                    stat.size,
+                    {contentType: 'image/jpeg'},
+                    function (error, result, response) {
+
+                        if (error) {
+                            throw error;
+                        }
+
+                        console.log('success in streaming the data up at :' + path);
+
+                        delete req.files;
+
+                        user.save(function (err) {
+                            if (err) throw err;
+                            console.log('userProfile3: ' + user.profilePic);
+                            res.json({success: true, uploadedImg: path + user._id + timestamp})
+                        });
+                    });
+            });
+        });
+    });
+
 
     //get a list of 20 users
     router.get('/api/users', function (req, res) {
