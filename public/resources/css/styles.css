@@ -3,6 +3,12 @@
     font-family: 'main';
     src: url('../fonts/HelveticaNeueLTCom-Md.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'thinFont';
+    src: url('../fonts/Raleway-Regular.ttf') format('truetype');
+}
+
+
 
 html {
     height: 100%;
@@ -319,4 +325,10 @@ input:-webkit-autofill:active {
     background: white;
     cursor: inherit;
     display: block;
+}
+
+.genreFormat {
+    font-size: 1.5em;
+    font-weight: lighter;
+    font-family: 'thinFont';
 }

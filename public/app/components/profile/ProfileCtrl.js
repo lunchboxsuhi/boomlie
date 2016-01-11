@@ -1,7 +1,45 @@
-angular.module('app').controller('ProfileCtrl', ['$scope', '$http', '$window', '$location', 'FileUploader',
-    function ($scope, $http, $window, $location, FileUploader) {
+angular.module('app').controller('ProfileCtrl', ['$scope', '$http', '$window', '$location', 'FileUploader', 'toastr',
+    function ($scope, $http, $window, $location, FileUploader, toastr) {
 
-        $scope.ownProfile = true;
+        //check token to see if it's own profile to allow these funcitons
+        $scope.ownProfile = true;       //is this the users current profile ?
+        $scope.editMode = false;        //allows user to edit the fields and submit it again
+        $scope.profileDetails = true;   //shows in-depth details of the proilfe "expanded view"
+
+        var genreList = function () {
+            var list = "";
+            for (var i = 0; i < $scope.profile.tags.length; i++) {
+
+                if (i == $scope.profile.tags.length - 1) {
+                    list += $scope.profile.tags[i].text;
+                }
+                else {
+                    list += $scope.profile.tags[i].text + ', ';
+                }
+            }
+            return list;
+        };
+
+        $scope.changeProfileDetails = function() {
+            $scope.profileDetails = !$scope.profileDetails;
+        }
+
+        $scope.editModeOn = function () {
+            $scope.editMode = true;
+        };
+
+        $scope.editModeSave = function () {
+            $scope.editMode = false;
+            $scope.profile.genre = genreList();
+            console.log($scope.profile);
+        };
+
+
+        $scope.editModeCancel = function () {
+            $scope.editMode = false;
+            $scope.profile.genre = genreList();
+            console.log($scope.profile);
+        };
 
         if (typeof $window.sessionStorage.token !== 'undefined') {
 
@@ -10,6 +48,7 @@ angular.module('app').controller('ProfileCtrl', ['$scope', '$http', '$window', '
             };
 
 
+            //upload Image click n stuff
             $scope.uploader = new FileUploader(
                 {
                     url: '/api2/uploadImage',
@@ -19,24 +58,25 @@ angular.module('app').controller('ProfileCtrl', ['$scope', '$http', '$window', '
                         }
                     ],
                     autoUpload: true,
-                    onSuccessItem: function(item, response, status, headers) {
+                    onSuccessItem: function (item, response, status, headers) {
                         console.log(response);
                         $scope.profile.profilePic = response.uploadedImg;
+                        toastr.success('Updated Profile Image');
                     }
                 });
 
             $http.post('/api/profile', data)
                 .then(function (res) {
-                    console.log(res.data);
-
                     var u = res.data;
 
                     $scope.profile = {
+                        accountType: u.accountType,
                         firstName: u.firstName,
                         lastName: u.lastName,
                         description: u.description,
-                        genre: u.genre,
+                        genre: "R&B, ELECTRO, JAZZ",
                         followers: u.followers,
+                        tags: [{text: "R&B"}, {text: "ELECTRO"}, {text: "JAZZ"}],
                         following: u.following,
                         profilePic: u.profilePic,
                         location: {

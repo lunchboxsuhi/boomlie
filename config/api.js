@@ -1,14 +1,16 @@
+var azureStorage = require('azure-storage');
+var connectMultiparty = require('connect-multiparty');
+var multipartMiddleware = connectMultiparty();
+var fs = require('fs');
+var User = require('../models/user.js');
+
 module.exports = function (router, app, jwt) {
 
 
     //utilities to be used for middleware on certain routes
-    var azureStorage = require('azure-storage');
-    var multipart = require('connect-multiparty');
-    var multipartMiddleware = multipart();
-    var fs = require('fs');
 
     //Models required to be used in api
-    var User = require('../models/user.js');
+
 
     //**************************************************
     //************ UnAthenticated Routes ***************
@@ -92,6 +94,17 @@ module.exports = function (router, app, jwt) {
     });
 
 
+    /* used for uploading the default avatar image to our server */
+    router.get('/uploadFromLocal', function (req, res) {
+        var blobService = azureStorage.createBlobService('boomlieimages', 'N+vTMgiekSk8aX0zUXMN21l0fo1pbCepE5DtE7Kz8pNPBmvZDeKL+rIbtCeiBlX/iWD56WHKH3vKpKEfA5KJIA==');
+
+        blobService.createBlockBlobFromLocalFile('imagecontainer', 'avatar', 'tempUpload/Avatar-295x295.jpg', function(error, result, response) {
+            if (error) throw error;
+
+            console.log(response);
+        });
+    });
+
     //***************************************************
     //**************** Authenticated routes *************
     //***************************************************
@@ -117,16 +130,12 @@ module.exports = function (router, app, jwt) {
                 // if the user has not uploaded an image yet it will remain empty
                 if (user.profilePic != "") {
 
-                    //extract the blobID from the url
+                    //extract the blobID from the url becuase of Async
                     var urlParse = currentUser.split('/');
                     var blobId = urlParse[urlParse.length - 1];
 
-                    console.log('user profile1: ' + currentUser);
-
                     blobService.doesBlobExist(container, blobId, function (err, res) {
                         if (err) throw err;
-
-                        console.log('userProfile2: ' + currentUser);
 
                         if (res == true) {
                             blobService.startCopyBlob(currentUser, container, blobId, function (err, res) {
@@ -135,19 +144,14 @@ module.exports = function (router, app, jwt) {
                                 if (res.copyStatus === "success") {
                                     blobService.deleteBlob(container, blobId, function (err, res) {
                                         if (err) throw err;
-
-                                        console.log("deleted old blob " + res);
                                     });
                                 }
                             });
                         }
-
-
                     });
-                } else {}
+                } // END findOne
 
                 user.profilePic = path + user._id + timestamp; //update the user
-
                 var readstream = fs.createReadStream(req.files.file.path);
 
                 blobService.createBlockBlobFromStream(
@@ -176,6 +180,13 @@ module.exports = function (router, app, jwt) {
         });
     });
 
+    //update proifle main info
+    router.post('/api/updateMainInfo', function(req, res) {
+
+        var user_id = req.decoded;
+
+
+    });
 
     //get a list of 20 users
     router.get('/api/users', function (req, res) {
@@ -198,6 +209,7 @@ module.exports = function (router, app, jwt) {
             User.findOne({_id: d.user_id}, function (err, u) {
                 //profile model - we don't want all the fields
                 var profile = {
+                    accountType: u.accountType,
                     firstName: u.firstName,
                     lastName: u.lastName,
                     description: u.description,
@@ -212,8 +224,10 @@ module.exports = function (router, app, jwt) {
                 };
 
                 res.json(profile);
-                console.log(u);
             });
         });
     });
+
+
+
 };

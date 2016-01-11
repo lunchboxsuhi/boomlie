@@ -18,7 +18,6 @@ angular.module('app').controller('NavbarCtrl',
             $scope.logout = function () {
                 delete $window.sessionStorage.token;
                 $location.path('/login');
-                console.log('loggedout');
                 $scope.user.loggedIn = authentication.isAuthenticated();
                 $scope.account.loggedIn = authentication.isAuthenticated();
                 toastr.success('Logged out successfully', 'Bye!', {iconClass: 'toastr-logout toast-success'});

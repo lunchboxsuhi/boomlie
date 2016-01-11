@@ -1,52 +1,133 @@
 <div class="row">
-    <div class="col-md-2" id="profilePicture" ng-if="!profile.profileDefaultPicture">
-        <img ng-src="{{profile.profilePic}}" style="width: 100%; height: 200px;"/>
-        <span class="btn btn-default-boomlie btn-file btn-block">
+    <div ng-if="!profileDetails">
+        <div class="col-md-12 smallDetails">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img style="max-width:75px; max-height:100px;" ng-src="{{profile.profilePic}}"></a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                           <li><a href="#">{{profile.firstName}} {{profile.lastName}}</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <ul><button class="btn-primary-boomlie btn" ng-click="changeProfileDetails()">show profile details</button></ul>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </div>
+    </div>
+    <div ng-if="profileDetails">
+        <div class="col-md-2" id="profilePicture" ng-if="!profile.profileDefaultPicture">
+            <img ng-src="{{profile.profilePic}}" style="width: 100%; height: 225px;"/>
+        <span ng-if="editMode" class="btn btn-default-boomlie btn-file btn-block">
             Upload Image <input type="file" nv-file-select uploader="uploader">
         </span>
-    </div>
-    <div class="col-md-2" ng-if="profile.profileDefaultPicture">
-        <img src="https://boomlieimages.blob.core.windows.net/imagecontainer/emptyAvatar" alt="no profile image found"
-             style="width: 100%; height: 100%;"/>
+        </div>
 
-    </div>
-
-
-    <div class="col-md-10">
-        <h2 class="profileOptions">
-            <b>{{profile.firstName}} {{profile.lastName}}</b>
-            <button ng-if="ownProfile" class="btn pull-right btn-warning-boomlie"><span
-                    class="glyphicon glyphicon-cog"></span> Edit Profile
-            </button>
-            <button ng-if="!ownProfile" class="btn pull-right btn-default-boomlie"><span
-                    class="glyphicon glyphicon-eye-open"></span> Follow
-            </button>
-            <button ng-if="!ownProfile" class="btn pull-right btn-primary-boomlie"><span
-                    class="glyphicon glyphicon-envelope"></span> Message
-            </button>
-
-        </h2>
-
-        <h2 class="text-small">{{profile.genre}}</h2>
-
-        <h2>
-            <small>{{profile.description}}</small>
-        </h2>
+        <div class="col-md-2" ng-if="profile.profileDefaultPicture">
+            <img src="https://boomlieimages.blob.core.windows.net/imagecontainer/avatar" alt="no profile image found"
+                 style="width: 100%; height: 100%;"/>
+        </div>
 
 
-        <h4><b>{{profile.location.country}}, {{profile.location.city}}</b></h4>
+        <div class="col-md-10">
+            <div class="profileOptions">
+                <!-- Account options -->
+                <button ng-if="ownProfile && editMode" class="btn pull-right btn-danger"
+                        ng-click="editModeCancel()"><span
+                        class="glyphicon glyphicon-remove"></span> Cancel
+                </button>
+                <button ng-if="ownProfile && editMode" class="btn pull-right btn-success"
+                        ng-click="editModeSave()"><span
+                        class="glyphicon glyphicon-check"></span> Save
+                </button>
+                <button ng-if="ownProfile && !editMode" class="btn pull-right btn-warning-boomlie"
+                        ng-click="editModeOn()"><span
+                        class="glyphicon glyphicon-cog"></span> Edit Profile
+                </button>
+                <button ng-if="!ownProfile" class="btn pull-right btn-default-boomlie"><span
+                        class="glyphicon glyphicon-eye-open"></span> Follow
+                </button>
+                <button ng-if="!ownProfile" class="btn pull-right btn-primary-boomlie"><span
+                        class="glyphicon glyphicon-envelope"></span> Message
+                </button>
 
-        <div class="socialStats">
-            <!-- followers -->
-            <span class="fa fa-users btn btn-primary-boomlie "></span><span
-                class="btn btn-default-boomlie followFormat">{{profile.followers}}</span>
 
-            <!--user status -->
-            <span class="fa fa-trophy btn btn-primary-boomlie "></span><span
-                class="btn btn-default-boomlie followFormat">Bronze</span>
+                <!-- Name Basic Account -->
+                <h1><b ng-if="!editMode">{{profile.firstName}} {{profile.lastName}}</b></h1>
 
-            <!--following -->
-            <span class="fa fa-bar-chart-o btn btn-primary-boomlie "></span><span class="btn btn-default-boomlie">{{profile.following}}</span>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span ng-if="editMode"><label><b>First Name: </b></label><input ng-model="profile.firstName"
+                                                                                        class="form-control"
+                                                                                        type="text"/></span>
+                    </div>
+                    <div class="col-md-4">
+                        <span ng-if="editMode"><label><b>Last Name: </b></label><input ng-model="profile.lastName"
+                                                                                       class="form-control"
+                                                                                       type="text"/></span>
+                    </div>
+                </div>
+
+                <!-- Name group/artist -->
+            <span ng-if="profile.accountType !== 'Fan'">
+                <b ng-if="!editMode">{{profile.firstName}} {{profile.lastName}}</b>
+                <span ng-if="editMode"><label><b>First Name: </b></label><input type="text"
+                                                                                value="{{profile.firstName}}"/></span>
+                <span ng-if="editMode"><label><b>Last Name: </b></label><input type="text"
+                                                                               value="{{profile.lastName}}"/></span>
+            </span>
+
+
+                <span ng-if="!editMode" class="genreFormat">{{profile.genre}}</span>
+
+                <div class="row">
+                    <div class="col-md-6">
+                    <span ng-if="editMode"><b>Genre: </b>
+                        <tags-input ng-model="profile.tags"></tags-input></span>
+                    </div>
+                </div>
+
+                <h2 ng-if="!editMode">
+                    <small>{{profile.description}}</small>
+                </h2>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <span ng-if="editMode"><b>Description:</b><textarea ng-model="profile.description"
+                                                                            class="form-control">{{profile.description}}</textarea></span>
+                    </div>
+                </div>
+                <h4><b>{{profile.location.country}}, {{profile.location.city}}</b></h4>
+
+            </div>
+
+            <div class="socialStats">
+                <!-- followers -->
+                <span class="fa fa-users btn btn-primary-boomlie "></span><span
+                    class="btn btn-default-boomlie followFormat">{{profile.followers}}</span>
+
+                <!--user status -->
+                <span class="fa fa-trophy btn btn-primary-boomlie "></span><span
+                    class="btn btn-default-boomlie followFormat">Bronze</span>
+
+                <!--following -->
+                <span class="fa fa-bar-chart-o btn btn-primary-boomlie "></span><span class="btn btn-default-boomlie">{{profile.following}}</span>
+                <button class="pull-right btn btn-primary-boomlie" ng-click="changeProfileDetails()"><span
+                        class="glyphicon-arrow-up glyphicon"></span> Collapse Details
+                </button>
+            </div>
         </div>
     </div>
 </div>

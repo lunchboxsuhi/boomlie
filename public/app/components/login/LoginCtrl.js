@@ -2,9 +2,6 @@ angular.module('app').controller('LoginCtrl',
     ['$scope', '$http', '$window', 'authentication', 'toastr', '$location',
         function ($scope, $http, $window, authentication, toastr, $location ) {
 
-
-    console.log(authentication.isAuthenticated());
-
     //Login Form is clicked
     $scope.loginForm = function () {
 
@@ -12,8 +9,6 @@ angular.module('app').controller('LoginCtrl',
             email: $scope.loginUser.email,
             password: $scope.loginUser.password
         };
-
-        console.log(user);
 
         $http.post('/authenticate', user)
             .success(function (res) {

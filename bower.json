@@ -15,7 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "*",
+    "angular": "~1.4.7",
     "angular-bootstrap": "~0.13.4",
     "angular-ui-router": "~0.2.15",
     "angular-wizard": "~0.5.5",
@@ -31,5 +31,8 @@
   "description": "y",
   "main": "",
   "moduleType": [],
-  "private": true
+  "private": true,
+  "resolutions": {
+    "angular": "~1.4.7"
+  }
 }

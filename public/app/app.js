@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app', ['ui.router', 'ui.bootstrap', 'mgo-angular-wizard', 'ngActivityIndicator', 'ngAnimate', 'toastr', 'angularFileUpload'])
+angular.module('app', ['ui.router', 'ui.bootstrap', 'mgo-angular-wizard', 'ngActivityIndicator', 'ngAnimate', 'toastr', 'angularFileUpload', 'ngTagsInput'])
     .run(['$rootScope', 'toastr', 'authentication', '$location', function ($rootScope, toastr, authentication, $location) {
         $rootScope.$on('$stateChangeStart', function (event, next) {
             var userAuthenticated = authentication.isAuthenticated();

@@ -11,6 +11,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Faker = require('Faker');
 var fs = require('fs');
+var paypal = require('paypal-rest-sdk');
 
 
 // CUSTOM
@@ -22,6 +23,12 @@ var router = express.Router();
 
 // configuration
 mongoose.connect(configDB.url); // connect to our database
+paypal.configure({
+   'host': 'api.sandbox.paypal.com',
+    'client_id':'AcjPW3CxTopFnSCQQcWbl4WYv3fQEDcTzOYqdNVqtT5HJbKVV5NkWd__VRGXjmORMkC0PmqzsXwkQlX4',
+    'client_secret': 'ELkkBPNUz-SaY31Bpc5y9itDJHFZE5aUuTjKjy3ml7IsLiIWEhiXzMeytR2tt35yYVR3B-vLbfO7qT8H'
+});
+
 
 // set up our express application
 app.set('superSecret', 'randomizationpassword');
@@ -84,6 +91,35 @@ router.get('/listOfUsers', function (req, res) {
     }).skip(50).limit(20).lean();
 });
 
+
+router.get('/paynow', function(req, res) {
+    var payment_details = {
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "redirect_urls": {
+            "return_url": "localhost:7999/",
+            "cancel_url": "localhost:7999/"
+        },
+        "transactions": [{
+            "amount": {
+                "total": "7.47",
+                "currency": "USD",
+                "details": {
+                    "subtotal": "7.41",
+                    "tax": "0.03",
+                    "shipping": "0.03"}},
+            "description": "This is the payment transaction description." }]};
+
+    paypal.payment.create(payment_details, function(err, payment) {
+        if (err) throw err;
+
+        res.redirect(payment.links[1].href);
+        console.log(payment);
+    });
+});
+
 //load the routes here
 require('./config/api')(router, app, jwt);
 
@@ -92,9 +128,9 @@ require('./config/api')(router, app, jwt);
 //****************************************************************//
 //****************************************************************//
 
-
-
 //load on the router middleware after it has been initialized and populated with routes
+
+
 //for pretty urls && allowing refreshing
 router.all('/*', function (req, res, next) {
     // Just send the index.html for other files to support HTML5Mode
@@ -104,10 +140,6 @@ router.all('/*', function (req, res, next) {
 //Give app the router object to be used.
 app.use(router);
 
-/*
- // routes ======================================================================
- require('./config/routes.js')(app, passport, jwt); // load our routes and pass in our app and fully configured passport
- */
 
 // launch ======================================================================
 app.listen(port);
