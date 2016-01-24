@@ -1,5 +1,7 @@
 //-------------------- Dependencies ----------------------------
 
+// RUN bower install when you get home... or to work and can get onto their network!
+
 // NPM
 var express = require('express');
 var port = process.env.PORT || 7999;
@@ -22,7 +24,7 @@ var app = express();
 var router = express.Router();
 
 // configuration
-mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(configDB.urlDev); // connect to our database
 paypal.configure({
    'host': 'api.sandbox.paypal.com',
     'client_id':'AcjPW3CxTopFnSCQQcWbl4WYv3fQEDcTzOYqdNVqtT5HJbKVV5NkWd__VRGXjmORMkC0PmqzsXwkQlX4',

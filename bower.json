@@ -26,7 +26,9 @@
     "underscore": "~1.8.3",
     "angular-toastr": "~1.5.0",
     "angular-animate": "~1.4.7",
-    "angular-file-upload": "~2.2.0"
+    "angular-file-upload": "~2.2.0",
+    "fakeLoader": "fakeloader#*",
+    "ng-tags-input": "~3.0.0"
   },
   "description": "y",
   "main": "",
