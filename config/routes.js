@@ -42,7 +42,8 @@ module.exports = function(app, passport, jwt) {
         res.redirect();
     });
 
-    app.post('/api/authenticate', function(req, res) {
+    app.post('/authenticate', function(req, res) {
+        console.log('test hit');
        User.findOne(
            {
                email: req.body.email

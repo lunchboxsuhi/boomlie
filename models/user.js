@@ -40,5 +40,9 @@ userSchema.methods.validPassword = function (password, dbPassword) {
     return bcrypt.compareSync(password, dbPassword);
 };
 
+userSchema.methods.devPassword = function(password, dbPassword) {
+    return password == dbPassword;
+}
+
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

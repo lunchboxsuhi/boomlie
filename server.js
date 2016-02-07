@@ -1,6 +1,6 @@
 //-------------------- Dependencies ----------------------------
 
-// RUN bower install when you get home... or to work and can get onto their network!
+// RUN bower install when you get home... or at work and can get onto their network!
 
 // NPM
 var express = require('express');
@@ -14,27 +14,27 @@ var bodyParser = require('body-parser');
 var Faker = require('Faker');
 var fs = require('fs');
 var paypal = require('paypal-rest-sdk');
-
-
-// CUSTOM
 var configDB = require('./config/database.js');
 
 // Initialize Router
 var app = express();
 var router = express.Router();
 
-// configuration
-mongoose.connect(configDB.urlDev); // connect to our database
-paypal.configure({
-   'host': 'api.sandbox.paypal.com',
-    'client_id':'AcjPW3CxTopFnSCQQcWbl4WYv3fQEDcTzOYqdNVqtT5HJbKVV5NkWd__VRGXjmORMkC0PmqzsXwkQlX4',
-    'client_secret': 'ELkkBPNUz-SaY31Bpc5y9itDJHFZE5aUuTjKjy3ml7IsLiIWEhiXzMeytR2tt35yYVR3B-vLbfO7qT8H'
-});
 
+//Development enviornment will be 7999
+//if it's not development then it will not be 7999 so it's production
+if (port == 7999) {
+    mongoose.connect(configDB.urlDev); // connect to our database
+    paypal.configure({
+        'host': 'api.sandbox.paypal.com',
+        'client_id':'AcjPW3CxTopFnSCQQcWbl4WYv3fQEDcTzOYqdNVqtT5HJbKVV5NkWd__VRGXjmORMkC0PmqzsXwkQlX4',
+        'client_secret': 'ELkkBPNUz-SaY31Bpc5y9itDJHFZE5aUuTjKjy3ml7IsLiIWEhiXzMeytR2tt35yYVR3B-vLbfO7qT8H'
+    });
 
-// set up our express application
-app.set('superSecret', 'randomizationpassword');
-app.use(morgan('dev'));                                     // log every request to the console
+    app.set('superSecret', 'randomizationpassword');
+    app.use(morgan('dev'));
+}
+
 app.use(bodyParser.json());                                 // get information from html forms
 app.use(bodyParser.urlencoded({extended: true}));           // get url-encoding?
 app.use(cors());                                            // allow cross origin information to be transferred
@@ -82,7 +82,9 @@ router.get('/populateDatabase', function (req, res) {
 });
 
 //make use of our auth middleware
-require('./config/auth')(router, app, jwt);
+//require('./config/auth')(router, app, jwt);
+var api = require('./config/api')(jwt);
+app.use(api);
 
 //show list of users
 router.get('/listOfUsers', function (req, res) {
@@ -93,6 +95,12 @@ router.get('/listOfUsers', function (req, res) {
     }).skip(50).limit(20).lean();
 });
 
+
+//combine all routes into a router config file while will load all
+//the files into a single config file and export from there
+//var routeConfig = require('./api');
+//app.use('/user', routeConfig.userApi());
+//app.use('/mailbox', routeConfig.mailboxApi());
 
 router.get('/paynow', function(req, res) {
     var payment_details = {
@@ -122,16 +130,9 @@ router.get('/paynow', function(req, res) {
     });
 });
 
+
 //load the routes here
-require('./config/api')(router, app, jwt);
-
-
-//************************ Azure UPLOAD API **********************//
-//****************************************************************//
-//****************************************************************//
-
-//load on the router middleware after it has been initialized and populated with routes
-
+//var api = require('./config/api')(app, jwt);
 
 //for pretty urls && allowing refreshing
 router.all('/*', function (req, res, next) {

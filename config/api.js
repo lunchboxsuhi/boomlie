@@ -3,14 +3,21 @@ var connectMultiparty = require('connect-multiparty');
 var multipartMiddleware = connectMultiparty();
 var fs = require('fs');
 var User = require('../models/user.js');
+var express = require('express');
 
-module.exports = function (router, app, jwt) {
 
+module.exports = function (jwt) {
+
+    var router = express.Router();
 
     //utilities to be used for middleware on certain routes
 
     //Models required to be used in api
 
+    router.get('/test', function(req, res) {
+       console.log('test');
+        res.json({success: true});
+    });
 
     //**************************************************
     //************ UnAthenticated Routes ***************
@@ -56,6 +63,29 @@ module.exports = function (router, app, jwt) {
 
     router.post('/authenticate', function (req, res) {
 
+        console.log(req.body);
+
+        User.findOne({ email: req.body.email }, function(err, data) {
+            if (err) throw err;
+
+            if (!data) {
+                res.json({success: false, message: 'no user matches e-mail'});
+            } else {
+                var dbUser = new User();
+                if (!dbUser.devPassword(req.body.password, data.password)) {
+                    res.json({message: 'emails don\'t match'});
+                } else { //make and give them a valid token
+                    var jwtModle = {
+                        user_id: data._id;
+                    }
+                    res.json({message: 'user found', data: data});
+                }
+
+
+            }
+        });
+
+        /*
         User.findOne({
             email: req.body.email
         }, function (err, user) {
@@ -91,6 +121,7 @@ module.exports = function (router, app, jwt) {
                 }
             }
         });
+        */
     });
 
 
@@ -228,6 +259,5 @@ module.exports = function (router, app, jwt) {
         });
     });
 
-
-
+    return router;
 };
